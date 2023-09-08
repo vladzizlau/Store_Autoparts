@@ -8,7 +8,6 @@
         <artifactId>AutoParts</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <packaging>pom</packaging>
 
     <artifactId>core</artifactId>
 <dependencies>
