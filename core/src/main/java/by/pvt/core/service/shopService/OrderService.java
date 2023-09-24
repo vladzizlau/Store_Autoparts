@@ -1,0 +1,53 @@
+package by.pvt.core.service.shopService;
+
+import by.pvt.api.dto.shopDTO.OrderRequest;
+import by.pvt.api.dto.shopDTO.OrderResponse;
+import by.pvt.core.convert.OrderConvert;
+import by.pvt.core.domain.Order;
+import by.pvt.core.repository.OrderRepository;
+import by.pvt.core.service.interfaceService.IOrder;
+
+import java.util.List;
+
+public class OrderService implements IOrder {
+    OrderRepository orderRepository;
+    OrderConvert orderConvert;
+
+    public OrderService() {
+        orderRepository = new OrderRepository();
+        orderConvert = new OrderConvert();
+    }
+
+    @Override
+    public void add(OrderRequest order) {
+        orderRepository.addOrder(orderConvert.toEntity(order));
+    }
+
+    @Override
+    public List<Order> getAll() {
+        return orderRepository.getAllOrder();
+    }
+
+    @Override
+    public Order searchById(long Id) {
+        return orderRepository.findById(Id);
+    }
+
+    public OrderResponse getOrderResponse(long id) {
+        return orderConvert.toDTO(searchById(id));
+    }
+
+    @Override
+    public void delete(Order order) {
+        orderRepository.delOrder(order);
+    }
+
+    @Override
+    public void edit(OrderRequest order, long productid, long userid, double cost, int count) {
+        order.setProductid(productid);
+        order.setUserid(userid);
+        order.setCount(count);
+        order.setCost(cost);
+        orderRepository.updateOrder(orderConvert.toEntity(order));
+    }
+}
