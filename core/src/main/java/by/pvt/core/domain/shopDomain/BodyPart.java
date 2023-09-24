@@ -1,4 +1,4 @@
-package by.pvt.core.domain;
+package by.pvt.core.domain.shopDomain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,14 +14,14 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(schema = "parts", name = "order")
-public class Order
+@Table(schema = "parts", name = "bodypart")
+public class BodyPart
     {
     @Id
     long id;
-    long productid;
-    long userid;
-    double cost;
+    String name;
+    String carBrand;
+    String carModel;
     int count;
-
-    }
+    double cost;
+}

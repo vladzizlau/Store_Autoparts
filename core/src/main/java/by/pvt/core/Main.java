@@ -1,6 +1,7 @@
 package by.pvt.core;
 
-import by.pvt.core.service.UserService;
+import by.pvt.core.repository.UserRepository;
+import by.pvt.core.service.shopService.UserService;
 import by.pvt.core.domain.User;
 
 import java.time.LocalDate;
@@ -8,7 +9,7 @@ import java.time.Month;
 
 public class Main
     {
-         static UserService userService = new UserService();
+         private final static UserService userService = new UserService();
 
 
 
@@ -16,9 +17,16 @@ public class Main
         {
 //        addUSer();
 //             deluser();
-            getUsers();
+//            getUsers();
 //        searchUser();
 //editUSer();
+        UserRepository userrepo = new UserRepository();
+        User user = userrepo.findById(1L);
+        user.setAge(1);
+        user.setFirstName("o");
+        user.setAmountSum(1.0);
+        userrepo.updateUser(user);
+
     }
 
         public static void addUSer() {
@@ -71,11 +79,11 @@ public class Main
             user5.setLastVisitDate(LocalDate.of(2023, Month.JUNE, 17));
             user5.setPhoneNumber("+3751756767659");
 
-            userService.addUSer(user1);
-            userService.addUSer(user2);
-            userService.addUSer(user3);
-            userService.addUSer(user4);
-            userService.addUSer(user5);
+//            userService.addUser(user1);
+//            userService.addUser(user2);
+//            userService.addUser(user3);
+//            userService.addUser(user4);
+//            userService.addUser(user5);
         }
 
         private static void deluser() {
@@ -92,11 +100,11 @@ public class Main
 
         private static void searchUser() {
 
-            System.out.println(userService.searchUserById(2));
+            System.out.println(userService.searchById(2));
         }
 
         private static void editUSer() {
-            User user = userService.searchUserById(2);
+            User user = userService.searchById(2);
 //        userService.editUser(user, 18, 22, "aleh", LocalDate.of(1901, 03, 07), "546646757464" "Pupkins");
         }
 

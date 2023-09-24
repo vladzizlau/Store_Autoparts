@@ -1,4 +1,4 @@
-package by.pvt.core.domain;
+package by.pvt.core.domain.shopDomain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,19 +9,22 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+//Автошины
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(schema = "parts", name = "order")
-public class Order
+@Table(schema = "parts", name = "tires")
+public class Tires
     {
     @Id
     long id;
-    long productid;
-    long userid;
-    double cost;
-    int count;
-
+    String manufacturer;
+    String name;
+    double profile_width;
+    double profile_height;
+    int diametr;
+    String season;
+    double price;
     }

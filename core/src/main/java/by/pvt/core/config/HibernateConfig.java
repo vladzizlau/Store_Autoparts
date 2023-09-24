@@ -1,13 +1,41 @@
 package by.pvt.core.config;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import by.pvt.core.domain.User;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+
+
+import java.util.Properties;
 
 public class HibernateConfig {
 
-    public static EntityManager getEntityManager(){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("AutoParts");
-        return entityManagerFactory.createEntityManager();
-        }
+    private final static StandardServiceRegistryBuilder standardServiceRegistryBuilder;
+    private final static Configuration configuration;
 
+    static {
+        Properties properties = new Properties();
+
+        properties.setProperty("hibernate.hbm2ddl.auto", "update");
+        properties.setProperty("hibernate.format_sql", "true");
+        properties.setProperty("hibernate.use_sql_comments", "true");
+        properties.setProperty("hibernate.show_sql", "true");
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+        properties.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
+
+        properties.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/autoparts"); //autoparts
+        properties.setProperty("hibernate.connection.username", "postgres");
+        properties.setProperty("hibernate.connection.password", "sa");
+
+        configuration = new Configuration();
+        configuration.addAnnotatedClass(User.class);
+        configuration.setProperties(properties);
+        standardServiceRegistryBuilder = new StandardServiceRegistryBuilder();
+        standardServiceRegistryBuilder.applySettings(properties);
+
+    }
+
+    public static SessionFactory getSessionFactory() {
+        SessionFactory sessionFactory = configuration.buildSessionFactory(standardServiceRegistryBuilder.build());
+        return sessionFactory;
+    }
 }
