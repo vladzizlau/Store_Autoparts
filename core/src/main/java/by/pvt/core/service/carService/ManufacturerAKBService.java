@@ -7,6 +7,7 @@ import by.pvt.core.domain.shopDomain.ManufacturerAKB;
 import by.pvt.core.repository.manufacturer.ManufacturerAKBRepo;
 import by.pvt.core.service.interfaceService.ImanufacturerAkb;
 
+import java.util.Collections;
 import java.util.List;
 
 public class ManufacturerAKBService implements ImanufacturerAkb
@@ -28,7 +29,7 @@ public class ManufacturerAKBService implements ImanufacturerAkb
         }
 
     @Override
-    public List<ManufacturerAKB> getAll()
+    public List<ManufacturerAKBResponse> getAll()
         {
         return manufacturerAKBRepo.getAll();
         }

@@ -31,19 +31,19 @@ public class UserRepository implements UserInterface
         }
 
     @Override
-    public List<User> getAllUsers()
+    public List<UserResponse> getAllUsers()
         {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
         Query query = session.createQuery("select u from User u");
-        return (List<User>) query.getResultList();
+        return (List<UserResponse>) query.getResultList();
         }
 
     @Override
-    public User findById(Long userID)
+    public UserResponse findById(Long userID)
         {
         Session session = sessionFactory.openSession();
-        return session.get(User.class, userID);
+        return session.get(UserResponse.class, userID);
         }
 
     @Override

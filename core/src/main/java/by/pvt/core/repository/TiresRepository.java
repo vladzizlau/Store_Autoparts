@@ -1,5 +1,6 @@
 package by.pvt.core.repository;
 
+import by.pvt.api.dto.carDTO.TiresResponse;
 import by.pvt.core.config.HibernateConfig;
 import by.pvt.core.domain.shopDomain.Tires;
 import by.pvt.core.repository.interfaceRepository.TiresInterface;
@@ -26,19 +27,19 @@ public class TiresRepository implements TiresInterface
         }
 
     @Override
-    public List<Tires> getAllTires()
+    public List<TiresResponse> getAllTires()
         {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
         Query query = session.createQuery("select a from Tires a");
-        return (List<Tires>) query.getResultList();
+        return (List<TiresResponse>) query.getResultList();
         }
 
     @Override
-    public Tires findById(Long tiresID)
+    public TiresResponse findById(Long tiresID)
         {
         Session session = sessionFactory.openSession();
-        return session.get(Tires.class, tiresID);
+        return session.get(TiresResponse.class, tiresID);
         }
 
     @Override

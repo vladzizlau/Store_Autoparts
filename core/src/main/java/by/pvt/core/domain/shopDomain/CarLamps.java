@@ -1,28 +1,26 @@
 package by.pvt.core.domain.shopDomain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(schema = "parts", name = "carlamp")
-public class CarLamps
-    {
+public class CarLamps {
     @Id
-    long id;
-    String name;
-    String model;
-    String socket;
-    String power;
-    int count;
-    double cost;
-    }
+    @GeneratedValue
+    private Long id;
+    private String name;
+    private String model;
+    private String socket;
+    private String power;
+    private Integer count;
+    private Double cost;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    @JoinColumn(name = "car_id")
+    private Car car;
+}

@@ -7,17 +7,21 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(schema = "parts", name = "manufacturer_akb")
-public class ManufacturerAKB
-    {
+public class ManufacturerAKB {
     @Id
-    long id;
-    String name;
-    }
+    private Long id;
+    private String name;
+
+
+    @OneToMany(mappedBy = "manufacturerAKB")
+    private List<AKB> akb;
+
+}

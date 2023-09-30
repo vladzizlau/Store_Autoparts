@@ -1,5 +1,6 @@
 package by.pvt.core.repository;
 
+import by.pvt.api.dto.carDTO.BodypartResponse;
 import by.pvt.core.config.HibernateConfig;
 import by.pvt.core.domain.shopDomain.BodyPart;
 import by.pvt.core.repository.interfaceRepository.BodyPartInterface;
@@ -27,19 +28,19 @@ public class BodyPartRepository implements BodyPartInterface
         }
 
     @Override
-    public List<BodyPart> getAllBodyParts()
+    public List<BodypartResponse> getAllBodyParts()
         {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
         Query query = session.createQuery("select a from BodyPart a");
-        return (List<BodyPart>) query.getResultList();
+        return (List<BodypartResponse>) query.getResultList();
         }
 
     @Override
-    public BodyPart findById(Long partsID)
+    public BodypartResponse findById(Long partsID)
         {
         Session session = sessionFactory.openSession();
-        return session.get(BodyPart.class, partsID);
+        return session.get(BodypartResponse.class, partsID);
         }
 
     @Override

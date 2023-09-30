@@ -1,5 +1,6 @@
 package by.pvt.core.repository;
 
+import by.pvt.api.dto.shopDTO.ShopcartResponse;
 import by.pvt.core.config.HibernateConfig;
 import by.pvt.core.domain.Shopcart;
 import by.pvt.core.repository.interfaceRepository.ShopcartInterface;
@@ -26,19 +27,19 @@ public class ShopCartRepository implements ShopcartInterface
         }
 
     @Override
-    public List<Shopcart> getAllShopcart()
+    public List<ShopcartResponse> getAllShopcart()
         {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
         Query query = session.createQuery("select a from Shopcart a");
-        return (List<Shopcart>) query.getResultList();
+        return (List<ShopcartResponse>) query.getResultList();
         }
 
     @Override
-    public Shopcart findById(Long shopcartID)
+    public ShopcartResponse findById(Long shopcartID)
         {
         Session session = sessionFactory.openSession();
-        return session.get(Shopcart.class, shopcartID);
+        return session.get(ShopcartResponse.class, shopcartID);
         }
 
     @Override

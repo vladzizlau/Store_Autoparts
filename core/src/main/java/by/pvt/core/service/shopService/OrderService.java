@@ -7,6 +7,7 @@ import by.pvt.core.domain.Order;
 import by.pvt.core.repository.OrderRepository;
 import by.pvt.core.service.interfaceService.IOrder;
 
+import java.util.Collections;
 import java.util.List;
 
 public class OrderService implements IOrder {
@@ -24,17 +25,13 @@ public class OrderService implements IOrder {
     }
 
     @Override
-    public List<Order> getAll() {
+    public List<OrderResponse> getAll() {
         return orderRepository.getAllOrder();
     }
 
     @Override
-    public Order searchById(long Id) {
+    public OrderResponse searchById(long Id) {
         return orderRepository.findById(Id);
-    }
-
-    public OrderResponse getOrderResponse(long id) {
-        return orderConvert.toDTO(searchById(id));
     }
 
     @Override
@@ -43,11 +40,12 @@ public class OrderService implements IOrder {
     }
 
     @Override
-    public void edit(OrderRequest order, long productid, long userid, double cost, int count) {
-        order.setProductid(productid);
-        order.setUserid(userid);
-        order.setCount(count);
-        order.setCost(cost);
-        orderRepository.updateOrder(orderConvert.toEntity(order));
+    public void edit(OrderRequest ord) {
+        Order order = orderConvert.toEntity(ord);
+        order.setProductid(ord.getProductid());
+        order.setUserid(ord.getUserid());
+        order.setCount(ord.getCount());
+        order.setCost(ord.getCost());
+        orderRepository.updateOrder(order);
     }
 }

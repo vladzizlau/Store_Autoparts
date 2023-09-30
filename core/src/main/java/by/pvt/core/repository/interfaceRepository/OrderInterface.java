@@ -1,18 +1,19 @@
 package by.pvt.core.repository.interfaceRepository;
 
+import by.pvt.api.dto.shopDTO.OrderResponse;
 import by.pvt.core.domain.Order;
+
 import java.util.List;
 
-public interface OrderInterface
-    {
+public interface OrderInterface {
 
     void addOrder(Order order);
 
-    List<Order> getAllOrder();
+    List<OrderResponse> getAllOrder();
 
-    Order findById(Long orderID);
+    OrderResponse findById(Long orderID);
 
     void updateOrder(Order order);
 
     void delOrder(Order order);
-    }
+}

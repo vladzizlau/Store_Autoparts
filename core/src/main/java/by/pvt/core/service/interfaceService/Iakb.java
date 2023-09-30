@@ -1,19 +1,19 @@
 package by.pvt.core.service.interfaceService;
 
 import by.pvt.api.dto.carDTO.AkbRequest;
+import by.pvt.api.dto.carDTO.AkbResponse;
 import by.pvt.core.domain.shopDomain.AKB;
 
 import java.util.List;
 
-public interface Iakb
-    {
+public interface Iakb {
     void add(AkbRequest akb);
 
-    List<AKB> getAll();
+    List<AkbResponse> getAll();
 
-    AKB searchById(long Id);
+    AkbResponse searchById(long Id);
 
     void delete(long id);
 
-    void edit(AkbRequest akb, String manufacturer, String name, int voltage,double battery_capacity, int electric_current, int length, int width, int height, double price);
+    void edit(AkbRequest akb);
 }

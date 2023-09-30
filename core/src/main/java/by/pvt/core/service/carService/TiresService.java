@@ -7,6 +7,7 @@ import by.pvt.core.domain.shopDomain.Tires;
 import by.pvt.core.repository.TiresRepository;
 import by.pvt.core.service.interfaceService.ITires;
 
+import java.util.Collections;
 import java.util.List;
 
 public class TiresService implements ITires {
@@ -24,18 +25,15 @@ public class TiresService implements ITires {
     }
 
     @Override
-    public List<Tires> getAll() {
+    public List<TiresResponse> getAll() {
         return tiresRepository.getAllTires();
     }
 
     @Override
-    public Tires searchById(long Id) {
+    public TiresResponse searchById(long Id) {
         return tiresRepository.findById(Id);
     }
 
-    public TiresResponse getTiresResponse(long id) {
-        return tiresConvert.toDTO(searchById(id));
-    }
 
     @Override
     public void delete(long id) {
@@ -43,13 +41,14 @@ public class TiresService implements ITires {
     }
 
     @Override
-    public void edit(TiresRequest tires, String manufacturer, String name, double profile_width, double profile_height, int diametr, String season, double price) {
-        tires.setManufacturer(manufacturer);
-        tires.setName(name);
-        tires.setProfile_width(profile_width);
-        tires.setProfile_height(profile_height);
-        tires.setDiametr(diametr);
-        tires.setSeason(season);
-        tires.setPrice(price);
+    public void edit(TiresRequest t) {
+        Tires tires = tiresConvert.toEntity(t);
+        tires.setManufacturer(t.getManufacturer());
+        tires.setName(t.getName());
+        tires.setProfile_width(t.getProfile_width());
+        tires.setProfile_height(t.getProfile_height());
+        tires.setDiametr(t.getDiametr());
+        tires.setSeason(t.getSeason());
+        tires.setPrice(t.getPrice());
     }
 }

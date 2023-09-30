@@ -1,5 +1,6 @@
 package by.pvt.core.repository.manufacturer;
 
+import by.pvt.api.dto.carDTO.ManufacturerAKBResponse;
 import by.pvt.core.config.HibernateConfig;
 import by.pvt.core.domain.shopDomain.ManufacturerAKB;
 import org.hibernate.Session;
@@ -25,12 +26,12 @@ public class ManufacturerAKBRepo implements IManufacturerAKB
         }
 
     @Override
-    public List<ManufacturerAKB> getAll()
+    public List<ManufacturerAKBResponse> getAll()
         {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
         Query query = session.createQuery("select a from ManufacturerAKB a");
-        return (List<ManufacturerAKB>) query.getResultList();
+        return (List<ManufacturerAKBResponse>) query.getResultList();
         }
 
     @Override

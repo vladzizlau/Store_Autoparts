@@ -5,22 +5,22 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 //Корзина
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(schema = "parts", name = "shopcart")
-public class Shopcart
-    {
+public class Shopcart {
     @Id
-    long id;
-    long orderid;
-    String status;
-    double cost;
-    }
+    @GeneratedValue
+    private Long id;
+    private Long orderid;
+    private String status;
+    private Double cost;
+
+    @OneToMany(mappedBy = "shopcart")
+    private List<Order> order;
+}

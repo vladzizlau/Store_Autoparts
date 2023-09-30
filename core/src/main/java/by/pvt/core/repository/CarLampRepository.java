@@ -1,5 +1,6 @@
 package by.pvt.core.repository;
 
+import by.pvt.api.dto.carDTO.CarLampResponse;
 import by.pvt.core.config.HibernateConfig;
 import by.pvt.core.domain.shopDomain.CarLamps;
 import by.pvt.core.repository.interfaceRepository.CarLampsInterface;
@@ -27,19 +28,19 @@ public class CarLampRepository implements CarLampsInterface
         }
 
     @Override
-    public List<CarLamps> getAllLamps()
+    public List<CarLampResponse> getAllLamps()
         {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
         Query query = session.createQuery("select a from CarLamps a");
-        return (List<CarLamps>) query.getResultList();
+        return (List<CarLampResponse>) query.getResultList();
         }
 
     @Override
-    public CarLamps findById(Long lampID)
+    public CarLampResponse findById(Long lampID)
         {
         Session session = sessionFactory.openSession();
-        return session.get(CarLamps.class, lampID);
+        return session.get(CarLampResponse.class, lampID);
         }
 
     @Override

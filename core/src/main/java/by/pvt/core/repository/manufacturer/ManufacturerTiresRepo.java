@@ -1,5 +1,6 @@
 package by.pvt.core.repository.manufacturer;
 
+import by.pvt.api.dto.carDTO.ManufacturerTiresResponse;
 import by.pvt.core.config.HibernateConfig;
 import by.pvt.core.domain.shopDomain.ManufacturerTires;
 import org.hibernate.Session;
@@ -25,12 +26,12 @@ public class ManufacturerTiresRepo implements IManufacturerTires
         }
 
     @Override
-    public List<ManufacturerTires> getAll()
+    public List<ManufacturerTiresResponse> getAll()
         {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
         Query query = session.createQuery("select a from ManufacturerTires a");
-        return (List<ManufacturerTires>) query.getResultList();
+        return (List<ManufacturerTiresResponse>) query.getResultList();
         }
 
 

@@ -1,5 +1,6 @@
 package by.pvt.core.repository;
 
+import by.pvt.api.dto.carDTO.AkbResponse;
 import by.pvt.core.config.HibernateConfig;
 import by.pvt.core.domain.shopDomain.AKB;
 import by.pvt.core.repository.interfaceRepository.AKBInterface;
@@ -27,19 +28,19 @@ public class AKBRepository implements AKBInterface
         }
 
     @Override
-    public List<AKB> getAllAKB()
+    public List<AkbResponse> getAllAKB()
         {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
         Query query = session.createQuery("select a from AKB a");
-        return (List<AKB>) query.getResultList();
+        return (List<AkbResponse>) query.getResultList();
         }
 
     @Override
-    public AKB findById(Long akbID)
+    public AkbResponse findById(Long akbID)
         {
         Session session = sessionFactory.openSession();
-        return session.get(AKB.class, akbID);
+        return session.get(AkbResponse.class, akbID);
         }
 
     @Override

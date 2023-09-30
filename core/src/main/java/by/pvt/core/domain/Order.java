@@ -1,13 +1,8 @@
 package by.pvt.core.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Builder
@@ -15,13 +10,24 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Entity
 @Table(schema = "parts", name = "order")
-public class Order
-    {
+public class Order {
     @Id
-    long id;
-    long productid;
-    long userid;
-    double cost;
-    int count;
+    @GeneratedValue
+    private Long id;
+    private Long productid;
+    private Long userid;
+    private Double cost;
+    private Integer count;
 
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    @JoinColumn(name = "shopcart_id")
+    private Shopcart shopcart;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    @JoinColumn(name = "user_id")
+    private User user;
+
+
+}

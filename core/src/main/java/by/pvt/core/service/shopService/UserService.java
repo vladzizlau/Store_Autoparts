@@ -8,6 +8,7 @@ import by.pvt.core.repository.UserRepository;
 import by.pvt.core.service.interfaceService.IUser;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 public class UserService implements IUser {
@@ -26,18 +27,13 @@ public class UserService implements IUser {
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<UserResponse> getAllUsers() {
         return userRepository.getAllUsers();
     }
 
     @Override
-    public User searchById(long userId) {
-        return userRepository.findById(userId);
-    }
-
-    public UserResponse getUserResponse(long id) {
-        return userConvert.userToDTO(searchById(id));
-    }
+    public UserResponse searchById(long userId) {
+    return userRepository.findById(userId);   }
 
     @Override
     public void delUser(long id) {
@@ -45,14 +41,15 @@ public class UserService implements IUser {
     }
 
     @Override
-    public void editUser(UserRequest user, Integer age, double amount_sum, String firstName, String surname, String phone, LocalDate last_date_visit) {
-        user.setAge(age);
-        user.setAmountSum(amount_sum);
-        user.setFirstName(firstName);
-        user.setLastVisitDate(last_date_visit);
-        user.setPhoneNumber(phone);
-        user.setSurName(surname);
-        userRepository.updateUser(userConvert.userToEntity(user));
+    public void editUser(UserRequest updateUser) {
+        User user = userConvert.userToEntity(updateUser);
+        user.setAge(updateUser.getAge());
+        user.setAmountSum(updateUser.getAmountSum());
+        user.setFirstName(updateUser.getFirstName());
+        user.setLastVisitDate(updateUser.getLastVisitDate());
+        user.setPhoneNumber(updateUser.getPhoneNumber());
+        user.setSurName(updateUser.getSurName());
+        userRepository.updateUser(user);
     }
 
 

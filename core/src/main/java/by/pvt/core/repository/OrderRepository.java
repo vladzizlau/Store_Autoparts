@@ -1,5 +1,6 @@
 package by.pvt.core.repository;
 
+import by.pvt.api.dto.shopDTO.OrderResponse;
 import by.pvt.core.config.HibernateConfig;
 import by.pvt.core.domain.Order;
 import by.pvt.core.repository.interfaceRepository.OrderInterface;
@@ -26,19 +27,19 @@ public class OrderRepository implements OrderInterface
         }
 
     @Override
-    public List<Order> getAllOrder()
+    public List<OrderResponse> getAllOrder()
         {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
         Query query = session.createQuery("select a from Order a");
-        return (List<Order>) query.getResultList();
+        return (List<OrderResponse>) query.getResultList();
         }
 
     @Override
-    public Order findById(Long orderID)
+    public OrderResponse findById(Long orderID)
         {
         Session session = sessionFactory.openSession();
-        return session.get(Order.class, orderID);
+        return session.get(OrderResponse.class, orderID);
         }
 
     @Override

@@ -1,6 +1,7 @@
 package by.pvt.core.service.interfaceService;
 
 import by.pvt.api.dto.carDTO.ManufacturerAKBRequest;
+import by.pvt.api.dto.carDTO.ManufacturerAKBResponse;
 import by.pvt.core.domain.shopDomain.ManufacturerAKB;
 
 
@@ -10,7 +11,7 @@ public interface ImanufacturerAkb
     {
     void add(ManufacturerAKBRequest makb);
 
-    List<ManufacturerAKB> getAll();
+    List<ManufacturerAKBResponse> getAll();
 
     void delete(long id);
 

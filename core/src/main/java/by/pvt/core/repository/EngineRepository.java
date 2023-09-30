@@ -1,5 +1,6 @@
 package by.pvt.core.repository;
 
+import by.pvt.api.dto.carDTO.EngineResponse;
 import by.pvt.core.config.HibernateConfig;
 import by.pvt.core.domain.shopDomain.Engine;
 import by.pvt.core.repository.interfaceRepository.EngineInterface;
@@ -27,19 +28,19 @@ public class EngineRepository implements EngineInterface
         }
 
     @Override
-    public List<Engine> getAllEngine()
+    public List<EngineResponse> getAllEngine()
         {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
         Query query = session.createQuery("select a from Engine a");
-        return (List<Engine>) query.getResultList();
+        return (List<EngineResponse>) query.getResultList();
         }
 
     @Override
-    public Engine findById(Long engineID)
+    public EngineResponse findById(Long engineID)
         {
         Session session = sessionFactory.openSession();
-        return session.get(Engine.class, engineID);
+        return session.get(EngineResponse.class, engineID);
         }
 
     @Override

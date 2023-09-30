@@ -7,56 +7,47 @@ import by.pvt.core.domain.shopDomain.CarLamps;
 import by.pvt.core.repository.CarLampRepository;
 import by.pvt.core.service.interfaceService.ICarLamp;
 
+import java.util.Collections;
 import java.util.List;
 
-public class CarLampService implements ICarLamp
-    {
-        private final CarLampRepository carLampRepository;
-        private final CarlampConvert carlampConvert;
+public class CarLampService implements ICarLamp {
+    private final CarLampRepository carLampRepository;
+    private final CarlampConvert carlampConvert;
 
-    public CarLampService()
-        {
+    public CarLampService() {
         carLampRepository = new CarLampRepository();
         carlampConvert = new CarlampConvert();
-        }
-
-    @Override
-    public void add(CarLampRequest lamp)
-        {
-        carLampRepository.addCarLamps(carlampConvert.toEntity(lamp));
-        }
-
-    @Override
-    public List<CarLamps> getAll()
-        {
-        return carLampRepository.getAllLamps();
-        }
-
-    @Override
-    public CarLamps searchById(long Id)
-        {
-        return carLampRepository.findById(Id);
-        }
-        public CarLampResponse getCarlampResponse(long id)
-        {
-            return carlampConvert.toDTO(searchById(id));
-        }
-
-    @Override
-    public void delete(long id)
-        {
-        carLampRepository.delCarLamps(id);
-        }
-
-    @Override
-    public void edit(CarLampRequest lamps, String name, String model, String socket, String power, int count, double cost)
-        {
-        lamps.setName(name);
-        lamps.setModel(model);
-        lamps.setSocket(socket);
-        lamps.setPower(power);
-        lamps.setCount(count);
-        lamps.setCost(cost);
-        carLampRepository.updateLamps(carlampConvert.toEntity(lamps));
-        }
     }
+
+    @Override
+    public void add(CarLampRequest lamp) {
+        carLampRepository.addCarLamps(carlampConvert.toEntity(lamp));
+    }
+
+    @Override
+    public List<CarLampResponse> getAll() {
+        return carLampRepository.getAllLamps();
+    }
+
+    @Override
+    public CarLampResponse searchById(long Id) {
+        return carLampRepository.findById(Id);
+    }
+
+    @Override
+    public void delete(long id) {
+        carLampRepository.delCarLamps(id);
+    }
+
+    @Override
+    public void edit(CarLampRequest lamp) {
+        CarLamps lamps = carlampConvert.toEntity(lamp);
+        lamps.setName(lamps.getName());
+        lamps.setModel(lamps.getModel());
+        lamps.setSocket(lamps.getSocket());
+        lamps.setPower(lamps.getPower());
+        lamps.setCount(lamps.getCount());
+        lamps.setCost(lamps.getCost());
+        carLampRepository.updateLamps(lamps);
+    }
+}
