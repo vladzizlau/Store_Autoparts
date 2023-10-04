@@ -3,14 +3,16 @@ package by.pvt.api.dto.carDTO;
 import lombok.Builder;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 @Builder
 public class EngineResponse {
-    long id;
-    String name;
-    String type;
-    double engine_capacity;
-    int count;
-    double cost;
+    private long id;
+    private String name;
+    private String type;
+    private double engineCapacity;
+    private int count;
+    private BigDecimal cost;
 
 }

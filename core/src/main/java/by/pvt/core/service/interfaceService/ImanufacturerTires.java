@@ -1,16 +1,15 @@
 package by.pvt.core.service.interfaceService;
 
-import by.pvt.api.dto.carDTO.ManufacturerTiresRequest;
-import by.pvt.api.dto.carDTO.ManufacturerTiresResponse;
-import by.pvt.core.domain.shopDomain.ManufacturerTires;
+import by.pvt.api.dto.carDTO.ManufacturerTireRequest;
+import by.pvt.api.dto.carDTO.ManufacturerTireResponse;
 
 import java.util.List;
 
 public interface ImanufacturerTires
     {
-    void add(ManufacturerTiresRequest mtires);
+    void add(ManufacturerTireRequest mtires);
 
-    List<ManufacturerTiresResponse> getAll();
+    List<ManufacturerTireResponse> getAll();
 
     void delete(long id);
 

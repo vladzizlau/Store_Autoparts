@@ -3,22 +3,23 @@ package by.pvt.core.domain.shopDomain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(schema = "parts", name = "engine")
 public class Engine {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String name;
-    private String type; //бензин или дизель
-    private Double engine_capacity;
+    private EngineType type; //бензин или дизель
+    private Double engineCapacity;
     private Integer count;
-    private Double cost;
+    private BigDecimal cost;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @EqualsAndHashCode.Exclude
-    @JoinColumn(name = "car_id")
-    private Car car;
+
 }

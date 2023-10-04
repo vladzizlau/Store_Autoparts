@@ -1,12 +1,15 @@
 package by.pvt.core.domain;
 
-import lombok.AllArgsConstructor;
+import by.pvt.core.domain.shopDomain.AKB;
+import by.pvt.core.domain.shopDomain.BodyPart;
+import by.pvt.core.domain.shopDomain.CarLamp;
+import by.pvt.core.domain.shopDomain.Tire;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import java.util.List;
+import java.math.BigDecimal;
 
 //Корзина
 @Data
@@ -17,10 +20,33 @@ public class Shopcart {
     @Id
     @GeneratedValue
     private Long id;
-    private Long orderid;
     private String status;
-    private Double cost;
+    private BigDecimal cost;
+    private Integer count;
 
-    @OneToMany(mappedBy = "shopcart")
-    private List<Order> order;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    @JoinColumn(name = "order_id")
+    private Order order;
+
+    @OneToOne (fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    @JoinColumn(name = "akb_id")
+    private AKB akb;
+
+    @OneToOne (fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    @JoinColumn(name = "bodypart_id")
+    private BodyPart bodyPart;
+
+    @OneToOne (fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    @JoinColumn(name = "carLamp_id")
+    private CarLamp carLamp;
+
+    @OneToOne (fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    @JoinColumn(name = "tire_id")
+    private Tire tire;
 }

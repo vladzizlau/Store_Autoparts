@@ -42,7 +42,7 @@ public class ShopcartService implements IShopCart {
     @Override
     public void edit(ShopcartRequest shr) {
         Shopcart shopcart = shopcartConvert.shopcartToEntity(shr);
-        shopcart.setOrderid(shr.getOrderid());
+//        shopcart.setCount(shr.);
         shopcart.setStatus(shr.getStatus());
         shopcart.setCost(shr.getCost());
         shopCartRepository.updateShopcart(shopcart);

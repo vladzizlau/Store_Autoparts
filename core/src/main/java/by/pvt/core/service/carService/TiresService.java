@@ -1,13 +1,14 @@
 package by.pvt.core.service.carService;
 
-import by.pvt.api.dto.carDTO.TiresRequest;
-import by.pvt.api.dto.carDTO.TiresResponse;
+import by.pvt.api.dto.carDTO.TireRequest;
+import by.pvt.api.dto.carDTO.TireResponse;
 import by.pvt.core.convert.TiresConvert;
-import by.pvt.core.domain.shopDomain.Tires;
+import by.pvt.core.domain.shopDomain.TireType;
+import by.pvt.core.domain.shopDomain.Tire;
 import by.pvt.core.repository.TiresRepository;
 import by.pvt.core.service.interfaceService.ITires;
 
-import java.util.Collections;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class TiresService implements ITires {
@@ -20,17 +21,17 @@ public class TiresService implements ITires {
     }
 
     @Override
-    public void add(TiresRequest tires) {
+    public void add(TireRequest tires) {
         tiresRepository.addTires(tiresConvert.toEntity(tires));
     }
 
     @Override
-    public List<TiresResponse> getAll() {
+    public List<TireResponse> getAll() {
         return tiresRepository.getAllTires();
     }
 
     @Override
-    public TiresResponse searchById(long Id) {
+    public TireResponse searchById(long Id) {
         return tiresRepository.findById(Id);
     }
 
@@ -41,14 +42,34 @@ public class TiresService implements ITires {
     }
 
     @Override
-    public void edit(TiresRequest t) {
-        Tires tires = tiresConvert.toEntity(t);
-        tires.setManufacturer(t.getManufacturer());
-        tires.setName(t.getName());
-        tires.setProfile_width(t.getProfile_width());
-        tires.setProfile_height(t.getProfile_height());
-        tires.setDiametr(t.getDiametr());
-        tires.setSeason(t.getSeason());
-        tires.setPrice(t.getPrice());
+    public void edit(TireRequest t) {
+        Tire tire = tiresConvert.toEntity(t);
+        tire.setName(t.getName());
+        tire.setProfile_width(t.getProfileWidth());
+        tire.setProfile_height(t.getProfileHeight());
+        tire.setDiametr(t.getDiametr());
+        tire.setSeason(TireType.valueOf(t.getSeason()));
+        tire.setPrice(t.getPrice());
+    }
+
+
+    public List<TireResponse> getTirebyDiametr(int d) {
+        return tiresRepository.getTirebyDiametr(d);
+    }
+
+    public List<TireResponse> getTirebyWidth(int w) {
+        return tiresRepository.getTirebyWidth(w);
+    }
+
+    public List<TireResponse> getTirebyHeight(int h) {
+        return tiresRepository.getTirebyHeight(h);
+    }
+
+    public List<TireResponse> getTirebySeason(TireType type) {
+        return tiresRepository.getTirebySeason(type);
+    }
+
+    public List<TireResponse> getTirebyPrice(BigDecimal start, BigDecimal end) {
+        return tiresRepository.getTireByPrice(start, end);
     }
 }

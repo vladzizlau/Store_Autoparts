@@ -1,13 +1,12 @@
 package by.pvt.core;
 
-import by.pvt.core.domain.Order;
-import by.pvt.core.domain.Shopcart;
-import by.pvt.core.repository.OrderRepository;
-import by.pvt.core.repository.ShopCartRepository;
-import by.pvt.core.repository.UserRepository;
+import by.pvt.core.domain.shopDomain.*;
+import by.pvt.core.repository.*;
+import by.pvt.core.service.carService.CarService;
 import by.pvt.core.service.shopService.UserService;
 import by.pvt.core.domain.User;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Month;
 
@@ -17,8 +16,12 @@ public class Main {
 
     public static void main(String[] args) {
 //        addUSer();
+//        addCar();
+//        addBodypart();
 //             deluser();
+        addEngine();
 //            getUsers();
+//        getCars();
 //        searchUser();
 //editUSer();
 //        UserRepository userrepo = new UserRepository();
@@ -48,6 +51,50 @@ public class Main {
 //
 
 
+    }
+
+    private static void addAKB() {
+//        AKB akb = AKB.builder()
+//                .name("Varta")
+//                .voltage(12)
+//                .battery_capacity(540.0)
+//                .electric_current(90)
+//                .length(230)
+//                .width(140)
+//                .height(150)
+//                .price(new BigDecimal(200))
+//                .build();
+        AKBRepository akbRepository = new AKBRepository();
+//        akbRepository.addAKB(akb);
+
+        System.out.println(akbRepository.getAKBbyPrice(new BigDecimal(100), new BigDecimal(500)));
+    }
+
+    private static void addBodypart() {
+       BodyPart bodyPart = BodyPart.builder()
+               .name("Бампер")
+               .count(1)
+               .cost(new BigDecimal(100))
+               .build();
+
+       BodyPartRepository bodyPartRepository = new BodyPartRepository();
+//       bodyPartRepository.addBodyPart(bodyPart);
+        System.out.println(bodyPartRepository.getBodypartByModel(2L));
+
+    }
+
+    private static void addEngine() {
+        Engine engine = Engine.builder()
+                .engineCapacity(2.0)
+                .type(EngineType.DIESEL)
+                .name("2.0TDI")
+                .count(1)
+                .cost(new BigDecimal(580))
+                .build();
+
+        EngineRepository engineRepository = new EngineRepository();
+//        engineRepository.addEngine(engine);
+        System.err.println(engineRepository.getEngineByType(EngineType.DIESEL));
     }
 
     public static void addUSer() {
@@ -130,5 +177,57 @@ public class Main {
 
 //        userService.editUser(user, 18, 22, "aleh", LocalDate.of(1901, 03, 07), "546646757464" "Pupkins");
     }
+
+    public static void addCar(){
+//        List <CarModel> brands = new List<CarModel>() {"Audi", "BMW", "Renault", "Citroen", "VW"};
+
+        CarRepository carRepository = new CarRepository();
+        Car car1 = Car.builder()
+                .brand("Audi")
+                .build();
+        carRepository.addCar(car1);
+
+        CarModel carModel = CarModel.builder()
+                .car(car1)
+                .model("A8")
+                .year(1998)
+                .build();
+        CarModel carModel1 = CarModel.builder()
+                .car(car1)
+                .model("A4")
+                .year(1995)
+                .build();
+        CarModel carModel2 = CarModel.builder()
+                .car(car1)
+                .model("A6")
+                .year(19968)
+                .build();
+        CarModelRepository carModelRepository = new CarModelRepository();
+        carModelRepository.addModel(carModel);
+        carModelRepository.addModel(carModel1);
+        carModelRepository.addModel(carModel2);
+
+
+//        BodyPart bodyPart = BodyPart.builder()
+//                .name("Фара передняя левая")
+//                .count(1)
+//                .cost(new BigDecimal(1000))
+//                .car(car1)
+//                .build();
+//        BodyPartRepository bodyPartRepository = new BodyPartRepository();
+//        bodyPartRepository.addBodyPart(bodyPart);
+    }
+
+    static void getCars(){
+//        CarService carService = new CarService();
+//         System.out.println(carService.getAll());
+//CarRepository carRepository = new CarRepository();
+//carRepository.getAllModel(1L);?
+
+        CarModelRepository carModelRepository = new CarModelRepository();
+        System.out.println(carModelRepository.getModelById(2L));
+
+    }
+
 
 }

@@ -1,20 +1,19 @@
 package by.pvt.core.service.interfaceService;
 
 
-import by.pvt.api.dto.carDTO.TiresRequest;
-import by.pvt.api.dto.carDTO.TiresResponse;
-import by.pvt.core.domain.shopDomain.Tires;
+import by.pvt.api.dto.carDTO.TireRequest;
+import by.pvt.api.dto.carDTO.TireResponse;
 
 import java.util.List;
 
 public interface ITires {
-    void add(TiresRequest tires);
+    void add(TireRequest tires);
 
-    List<TiresResponse> getAll();
+    List<TireResponse> getAll();
 
-    TiresResponse searchById(long Id);
+    TireResponse searchById(long Id);
 
     void delete(long id);
 
-    void edit(TiresRequest tires);
+    void edit(TireRequest tires);
 }

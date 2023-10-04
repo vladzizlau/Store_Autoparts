@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class BodyPartRepository implements BodyPartInterface
@@ -34,6 +35,22 @@ public class BodyPartRepository implements BodyPartInterface
         session.getTransaction().begin();
         Query query = session.createQuery("select a from BodyPart a");
         return (List<BodypartResponse>) query.getResultList();
+        }
+
+        public List<BodypartResponse> getBodypartByModel(Long modelid)
+        {
+            Session session = sessionFactory.openSession();
+            session.getTransaction().begin();
+            Query query = session.createQuery("select a from BodyPart a where model_id = :modelID").setParameter("modelID", modelid);
+            return (List<BodypartResponse>) query.getResultList();
+        }
+        public List<BodypartResponse> getBydypartByPrice(BigDecimal start, BigDecimal end) {
+            Session session = sessionFactory.openSession();
+            session.getTransaction().begin();
+            Query query = session.createQuery("select a from BodyPart a where a.cost >= :start AND a.cost <= :end");
+            query.setParameter("start", start);
+            query.setParameter("end", end);
+            return (List<BodypartResponse>) query.getResultList();
         }
 
     @Override

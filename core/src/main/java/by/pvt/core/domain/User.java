@@ -17,6 +17,7 @@ import java.util.List;
 @Table(schema = "parts", name = "user")
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String firstName;
     private String surName;
@@ -33,5 +34,6 @@ public class User {
     private List<Order> order;
 
     @OneToMany (mappedBy = "user")
-    private List<Car> car;
+    private List<Comments> comments;
+
 }

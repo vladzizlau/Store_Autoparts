@@ -5,9 +5,9 @@ import lombok.Data;
 
 @Data
 @Builder
-public class ManufacturerTiresResponse {
-    long id;
-    String name;
+public class ManufacturerTireResponse {
+    private long id;
+    private String name;
 
 
 }

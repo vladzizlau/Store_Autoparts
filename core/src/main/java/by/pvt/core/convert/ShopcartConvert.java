@@ -8,7 +8,7 @@ public class ShopcartConvert {
     public Shopcart shopcartToEntity(ShopcartRequest scr) {
         Shopcart entity = Shopcart.builder()
                 .id(scr.getId())
-                .orderid(scr.getOrderid())
+//                .orderId(scr.getOrderId())
                 .cost(scr.getCost())
                 .status(scr.getStatus())
                 .build();
@@ -19,7 +19,7 @@ public class ShopcartConvert {
     public ShopcartResponse toDTO(Shopcart shopcart) {
         ShopcartResponse dto = ShopcartResponse.builder()
                 .id(shopcart.getId())
-                .orderid(shopcart.getOrderid())
+//                .orderId(shopcart.getOrderId())
                 .cost(shopcart.getCost())
                 .status(shopcart.getStatus())
                 .build();

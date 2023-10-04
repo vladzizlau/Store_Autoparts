@@ -3,26 +3,21 @@ package by.pvt.core.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(schema = "parts", name = "order")
 public class Order {
     @Id
     @GeneratedValue
     private Long id;
-    private Long productid;
-    private Long userid;
     private Double cost;
-    private Integer count;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @EqualsAndHashCode.Exclude
-    @JoinColumn(name = "shopcart_id")
-    private Shopcart shopcart;
+
+    @OneToMany(mappedBy = "order")
+    private List<Shopcart> shopcart;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude

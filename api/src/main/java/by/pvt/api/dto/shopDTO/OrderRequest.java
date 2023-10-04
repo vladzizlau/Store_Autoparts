@@ -6,11 +6,11 @@ import lombok.Data;
 @Data
 
 public class OrderRequest {
-    long id;
-    long productid;
-    long userid;
-    double cost;
-    int count;
+    private long id;
+    private long productId;
+    private long userId;
+    private double cost;
+    private int count;
 
 
 }

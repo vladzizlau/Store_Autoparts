@@ -42,9 +42,6 @@ public class OrderService implements IOrder {
     @Override
     public void edit(OrderRequest ord) {
         Order order = orderConvert.toEntity(ord);
-        order.setProductid(ord.getProductid());
-        order.setUserid(ord.getUserid());
-        order.setCount(ord.getCount());
         order.setCost(ord.getCost());
         orderRepository.updateOrder(order);
     }

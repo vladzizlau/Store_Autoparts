@@ -9,16 +9,16 @@ import java.time.LocalDate;
 @Data
 
 public class UserRequest {
-    long id;
-    String firstName;
-    String surName;
+    private long id;
+    private String firstName;
+    private String surName;
     @Setter
-    String password;
-    Integer age;
-    String phoneNumber;
-    String email;
-    LocalDate lastVisitDate;
-    double amountSum;
+    private String password;
+    private Integer age;
+    private String phoneNumber;
+    private String email;
+    private LocalDate lastVisitDate;
+    private double amountSum;
 
 
 }

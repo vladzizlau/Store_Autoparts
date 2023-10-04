@@ -4,20 +4,22 @@ package by.pvt.api.dto.carDTO;
 import lombok.Builder;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 
 @Data
 @Builder
 
 public class AkbResponse {
-    long id;
-    String manufacturer;
-    String name;
-    int voltage;
-    double battery_capacity;
-    int electric_current;
-    int length;
-    int width;
-    int height;
-    double price;
+    private long id;
+    private String manufacturer;
+    private String name;
+    private  int voltage;
+    private double batteryCapacity;
+    private int electricCurrent;
+    private int length;
+    private int width;
+    private int height;
+    private BigDecimal price;
 
 }

@@ -10,19 +10,19 @@ import java.time.LocalDate;
 @Builder
 public class UserResponse {
 
-    long id;
+    private long id;
 
-    String firstName;
+    private String firstName;
 
-    String surName;
+    private String surName;
 
-    Integer age;
+    private Integer age;
 
-    String phoneNumber;
+    private String phoneNumber;
 
-    String email;
+    private String email;
 
-    LocalDate lastVisitDate;
+    private LocalDate lastVisitDate;
 
-    double amountSum;
+    private double amountSum;
 }

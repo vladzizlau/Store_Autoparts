@@ -1,13 +1,11 @@
 package by.pvt.core.service.carService;
 
-import by.pvt.api.dto.carDTO.ManufacturerTiresRequest;
-import by.pvt.api.dto.carDTO.ManufacturerTiresResponse;
+import by.pvt.api.dto.carDTO.ManufacturerTireRequest;
+import by.pvt.api.dto.carDTO.ManufacturerTireResponse;
 import by.pvt.core.convert.ManufacturerTiresConvert;
-import by.pvt.core.domain.shopDomain.ManufacturerTires;
 import by.pvt.core.repository.manufacturer.ManufacturerTiresRepo;
 import by.pvt.core.service.interfaceService.ImanufacturerTires;
 
-import java.util.Collections;
 import java.util.List;
 
 public class ManufacturerTiresService implements ImanufacturerTires
@@ -22,13 +20,13 @@ public class ManufacturerTiresService implements ImanufacturerTires
         }
 
     @Override
-    public void add(ManufacturerTiresRequest mtires)
+    public void add(ManufacturerTireRequest mtires)
         {
         manufacturerTiresRepo.add(tiresConvert.toEntity(mtires));
         }
 
     @Override
-    public List<ManufacturerTiresResponse> getAll()
+    public List<ManufacturerTireResponse> getAll()
         {
         return manufacturerTiresRepo.getAll();
         }

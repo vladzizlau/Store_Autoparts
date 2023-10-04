@@ -6,21 +6,22 @@ import javax.persistence.*;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(schema = "parts", name = "carlamp")
-public class CarLamps {
+@Table(schema = "parts", name = "model")
+public class CarModel {
+
     @Id
     @GeneratedValue
     private Long id;
-    private String name;
     private String model;
-    private String socket;
-    private String power;
-    private Integer count;
-    private Double cost;
+    private int year;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
     @JoinColumn(name = "car_id")
     private Car car;
+
+
 }

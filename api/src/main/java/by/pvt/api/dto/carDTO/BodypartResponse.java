@@ -3,13 +3,15 @@ package by.pvt.api.dto.carDTO;
 import lombok.Builder;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 @Builder
 public class BodypartResponse {
-    long id;
-    String name;
-    String carBrand;
-    String carModel;
-    int count;
-    double cost;
+    private long id;
+    private String name;
+    private String carBrand;
+    private String carModel;
+    private int count;
+    private BigDecimal cost;
 }

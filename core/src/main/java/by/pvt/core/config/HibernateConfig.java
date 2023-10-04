@@ -1,4 +1,5 @@
 package by.pvt.core.config;
+import by.pvt.core.domain.Comments;
 import by.pvt.core.domain.Order;
 import by.pvt.core.domain.Shopcart;
 import by.pvt.core.domain.User;
@@ -18,7 +19,7 @@ public class HibernateConfig {
     static {
         Properties properties = new Properties();
 
-        properties.setProperty("hibernate.hbm2ddl.auto", "create");
+        properties.setProperty("hibernate.hbm2ddl.auto", "none");
         properties.setProperty("hibernate.format_sql", "true");
         properties.setProperty("hibernate.use_sql_comments", "true");
         properties.setProperty("hibernate.show_sql", "true");
@@ -36,11 +37,13 @@ public class HibernateConfig {
         configuration.addAnnotatedClass(AKB.class);
         configuration.addAnnotatedClass(BodyPart.class);
         configuration.addAnnotatedClass(Car.class);
-        configuration.addAnnotatedClass(CarLamps.class);
+        configuration.addAnnotatedClass(CarModel.class);
+        configuration.addAnnotatedClass(CarLamp.class);
         configuration.addAnnotatedClass(Engine.class);
         configuration.addAnnotatedClass(ManufacturerAKB.class);
         configuration.addAnnotatedClass(ManufacturerTires.class);
-        configuration.addAnnotatedClass(Tires.class);
+        configuration.addAnnotatedClass(Tire.class);
+        configuration.addAnnotatedClass(Comments.class);
         configuration.setProperties(properties);
         standardServiceRegistryBuilder = new StandardServiceRegistryBuilder();
         standardServiceRegistryBuilder.applySettings(properties);

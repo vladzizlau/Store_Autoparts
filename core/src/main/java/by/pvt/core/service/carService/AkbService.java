@@ -7,7 +7,7 @@ import by.pvt.core.domain.shopDomain.AKB;
 import by.pvt.core.repository.AKBRepository;
 import by.pvt.core.service.interfaceService.Iakb;
 
-import java.util.Collections;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class AkbService implements Iakb {
@@ -30,6 +30,18 @@ public class AkbService implements Iakb {
     public List<AkbResponse> getAll() {
         return akbRepository.getAllAKB();
     }
+    @Override
+    public List<AkbResponse> getAKBbyVoltage(int volt){
+        return akbRepository.getAKBbyVoltage(volt);
+    }
+    @Override
+    public List<AkbResponse> getAKBbyBatteryCapacity(Double capacity){
+        return akbRepository.getAKBbyBatteryCapacity(capacity);
+    }
+    @Override
+    public List<AkbResponse> getAKBbyPrice(BigDecimal start, BigDecimal end) {
+        return akbRepository.getAKBbyPrice(start, end);
+    }
 
     @Override
     public AkbResponse searchById(long id) {
@@ -45,11 +57,10 @@ public class AkbService implements Iakb {
     @Override
     public void edit(AkbRequest a) {
         AKB akb = akbConvert.akbtoEntity(a);
-        akb.setManufacturer(a.getManufacturer());
         akb.setName(a.getName());
         akb.setVoltage(a.getVoltage());
-        akb.setBattery_capacity(a.getBattery_capacity());
-        akb.setElectric_current(a.getElectric_current());
+        akb.setBattery_capacity(a.getBatteryCapacity());
+        akb.setElectric_current(a.getElectricCurrent());
         akb.setLength(a.getLength());
         akb.setWidth(a.getWidth());
         akb.setHeight(a.getHeight());

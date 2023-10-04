@@ -1,7 +1,7 @@
 package by.pvt.core.domain;
 
 public enum Status {
-    Active,
-    Block,
-    Premium
+    ACTIVE,
+    BLOCK,
+    PREMIUM
 }

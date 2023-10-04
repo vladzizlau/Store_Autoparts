@@ -3,6 +3,7 @@ package by.pvt.core.domain.shopDomain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Data
 @Builder
@@ -12,15 +13,14 @@ import javax.persistence.*;
 @Table(schema = "parts", name = "bodypart")
 public class BodyPart {
     @Id
+    @GeneratedValue (strategy = GenerationType.SEQUENCE)
     private Long id;
     private String name;
-    private String carBrand;
-    private String carModel;
     private Integer count;
-    private Double cost;
+    private BigDecimal cost;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
-    @JoinColumn(name = "car_id")
-    private Car car;
+    @JoinColumn(name = "model_id")
+    private CarModel carModel;
 }

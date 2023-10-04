@@ -1,29 +1,48 @@
 package by.pvt.core.convert;
 
+import by.pvt.api.dto.carDTO.CarModelRequest;
+import by.pvt.api.dto.carDTO.CarModelResponse;
 import by.pvt.api.dto.carDTO.CarRequest;
 import by.pvt.api.dto.carDTO.CarResponse;
 import by.pvt.core.domain.shopDomain.Car;
+import by.pvt.core.domain.shopDomain.CarModel;
+
+import java.util.Collections;
 
 public class CarConvert {
-    public Car toEntity (CarRequest request)
-    {
+    public Car carToEntity(CarRequest request) {
         Car car = Car.builder()
                 .id(request.getId())
-                .car_brand(request.getCar_brand())
-                .car_model(request.getCar_model())
-                .year(request.getYear())
+                .brand(request.getBrand())
                 .build();
         return car;
     }
 
-    public CarResponse toDTO(Car car)
-    {
+    public CarResponse carToDTO(Car car) {
         CarResponse dto = CarResponse.builder()
                 .id(car.getId())
-                .car_brand(car.getCar_brand())
-                .car_model(car.getCar_model())
-                .year(car.getYear())
+                .brand(car.getBrand())
                 .build();
         return dto;
+    }
+
+    public CarModel modelToEntity(CarModelRequest modelRequest)
+    {
+        CarModel model = CarModel.builder()
+                .id(modelRequest.getId())
+                .model(modelRequest.getModel())
+                .year(modelRequest.getYear())
+                .build();
+        return model;
+    }
+
+    public CarModelResponse modelToDTO(CarModel model)
+    {
+        CarModelResponse resp = CarModelResponse.builder()
+                .id(model.getId())
+                .model(model.getModel())
+                .year(model.getYear())
+                .build();
+        return resp;
     }
 }

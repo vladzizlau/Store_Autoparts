@@ -24,6 +24,6 @@ public class ManufacturerTires {
 
 
     @OneToMany(mappedBy = "manufacturerTires")
-    private List<Tires> tires;
+    private List<Tire> tire;
 
 }

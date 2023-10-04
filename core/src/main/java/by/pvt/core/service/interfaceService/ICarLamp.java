@@ -2,7 +2,7 @@ package by.pvt.core.service.interfaceService;
 
 import by.pvt.api.dto.carDTO.CarLampRequest;
 import by.pvt.api.dto.carDTO.CarLampResponse;
-import by.pvt.core.domain.shopDomain.CarLamps;
+import by.pvt.core.domain.shopDomain.CarLamp;
 
 import java.util.List;
 

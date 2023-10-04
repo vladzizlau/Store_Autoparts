@@ -2,12 +2,12 @@ package by.pvt.core.convert;
 
 import by.pvt.api.dto.carDTO.CarLampRequest;
 import by.pvt.api.dto.carDTO.CarLampResponse;
-import by.pvt.core.domain.shopDomain.CarLamps;
+import by.pvt.core.domain.shopDomain.CarLamp;
 
 public class CarlampConvert {
-    public CarLamps toEntity(CarLampRequest request)
+    public CarLamp toEntity(CarLampRequest request)
     {
-        CarLamps entity = CarLamps.builder()
+        CarLamp entity = CarLamp.builder()
                 .id(request.getId())
                 .name(request.getName())
                 .model(request.getModel())
@@ -19,7 +19,7 @@ public class CarlampConvert {
         return entity;
     }
 
-    public CarLampResponse toDTO(CarLamps lamps)
+    public CarLampResponse toDTO(CarLamp lamps)
     {
         CarLampResponse dto = CarLampResponse.builder()
                 .id(lamps.getId())

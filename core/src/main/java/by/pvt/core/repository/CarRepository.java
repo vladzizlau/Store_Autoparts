@@ -3,6 +3,7 @@ package by.pvt.core.repository;
 import by.pvt.api.dto.carDTO.CarResponse;
 import by.pvt.core.config.HibernateConfig;
 import by.pvt.core.domain.shopDomain.Car;
+import by.pvt.core.domain.shopDomain.CarModel;
 import by.pvt.core.repository.interfaceRepository.CarInterface;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -27,13 +28,14 @@ public class CarRepository implements CarInterface
         session.close();
         }
 
-    @Override
+//    @Override
     public List<CarResponse> getAllCars()
         {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
-        Query query = session.createQuery("select a from Car a");
+        Query query = session.createQuery("select c from Car c");
         return (List<CarResponse>) query.getResultList();
+
         }
 
     @Override
@@ -62,4 +64,6 @@ public class CarRepository implements CarInterface
         session.remove(car);
         session.close();
         }
+
+
     }

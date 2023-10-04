@@ -3,6 +3,7 @@ package by.pvt.core.convert;
 import by.pvt.api.dto.carDTO.EngineRequest;
 import by.pvt.api.dto.carDTO.EngineResponse;
 import by.pvt.core.domain.shopDomain.Engine;
+import by.pvt.core.domain.shopDomain.EngineType;
 
 public class EngineConvert {
     public Engine toEntity(EngineRequest request)
@@ -10,8 +11,8 @@ public class EngineConvert {
         Engine entity = Engine.builder()
                 .id(request.getId())
                 .name(request.getName())
-                .type(request.getType())
-                .engine_capacity(request.getEngine_capacity())
+                .type(EngineType.valueOf(request.getType()))
+                .engineCapacity(request.getEngineCapacity())
                 .count(request.getCount())
                 .cost(request.getCost())
                 .build();
@@ -23,8 +24,8 @@ public class EngineConvert {
         EngineResponse dto= EngineResponse.builder()
                 .id(engine.getId())
                 .name(engine.getName())
-                .type(engine.getType())
-                .engine_capacity(engine.getEngine_capacity())
+                .type(String.valueOf(engine.getType()))
+                .engineCapacity(engine.getEngineCapacity())
                 .count(engine.getCount())
                 .cost(engine.getCost())
                 .build();

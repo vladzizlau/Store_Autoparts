@@ -1,15 +1,16 @@
 package by.pvt.api.dto.carDTO;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
+@AllArgsConstructor
 public class CarResponse {
-    long id;
-    String car_brand;
-    String car_model;
-    int year;
+    private long id;
+    private String brand;
+
 
 
 }

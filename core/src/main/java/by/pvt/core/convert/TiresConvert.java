@@ -1,33 +1,32 @@
 package by.pvt.core.convert;
 
-import by.pvt.api.dto.carDTO.TiresRequest;
-import by.pvt.api.dto.carDTO.TiresResponse;
-import by.pvt.core.domain.shopDomain.Tires;
+import by.pvt.api.dto.carDTO.TireRequest;
+import by.pvt.api.dto.carDTO.TireResponse;
+import by.pvt.core.domain.shopDomain.TireType;
+import by.pvt.core.domain.shopDomain.Tire;
 
 public class TiresConvert {
-    public Tires toEntity(TiresRequest request) {
-        Tires entity = Tires.builder()
+    public Tire toEntity(TireRequest request) {
+        Tire entity = Tire.builder()
                 .id(request.getId())
-                .manufacturer(request.getManufacturer())
                 .name(request.getName())
-                .profile_width(request.getProfile_width())
-                .profile_height(request.getProfile_height())
+                .profile_width(request.getProfileWidth())
+                .profile_height(request.getProfileHeight())
                 .diametr(request.getDiametr())
-                .season(request.getSeason())
+                .season(TireType.valueOf(request.getSeason()))
                 .price(request.getPrice())
                 .build();
         return entity;
     }
 
-    public TiresResponse toDTO(Tires tires) {
-        TiresResponse dto = TiresResponse.builder()
+    public TireResponse toDTO(Tire tires) {
+        TireResponse dto = TireResponse.builder()
                 .id(tires.getId())
-                .manufacturer(tires.getManufacturer())
                 .name(tires.getName())
-                .profile_width(tires.getProfile_width())
-                .profile_height(tires.getProfile_height())
+                .profileWidth(tires.getProfile_width())
+                .profileHeight(tires.getProfile_height())
                 .diametr(tires.getDiametr())
-                .season(tires.getSeason())
+                .season(String.valueOf(tires.getSeason()))
                 .price(tires.getPrice())
                 .build();
         return dto;

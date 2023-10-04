@@ -2,15 +2,16 @@ package by.pvt.core.repository;
 
 import by.pvt.api.dto.carDTO.CarLampResponse;
 import by.pvt.core.config.HibernateConfig;
-import by.pvt.core.domain.shopDomain.CarLamps;
-import by.pvt.core.repository.interfaceRepository.CarLampsInterface;
+import by.pvt.core.domain.shopDomain.CarLamp;
+import by.pvt.core.repository.interfaceRepository.CarLampInterface;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
+import java.math.BigDecimal;
 import java.util.List;
 
-public class CarLampRepository implements CarLampsInterface
+public class CarLampRepository implements CarLampInterface
     {
     private final SessionFactory sessionFactory;
 
@@ -18,7 +19,7 @@ public class CarLampRepository implements CarLampsInterface
     sessionFactory = HibernateConfig.getSessionFactory();
     }
     @Override
-    public void addCarLamps(CarLamps lamps)
+    public void addCarLamps(CarLamp lamps)
         {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
@@ -35,7 +36,31 @@ public class CarLampRepository implements CarLampsInterface
         Query query = session.createQuery("select a from CarLamps a");
         return (List<CarLampResponse>) query.getResultList();
         }
-
+        @Override
+        public List<CarLampResponse> getCarLampByPower(int power)
+        {
+            Session session = sessionFactory.openSession();
+            session.getTransaction().begin();
+            Query query = session.createQuery("select a from CarLamp a where power = :power").setParameter("power", power);
+            return (List<CarLampResponse>) query.getResultList();
+        }
+        @Override
+        public List<CarLampResponse> getCarLampBySocket(String socket)
+        {
+            Session session = sessionFactory.openSession();
+            session.getTransaction().begin();
+            Query query = session.createQuery("select a from CarLamp a where socket = :socket").setParameter("socket", socket);
+            return (List<CarLampResponse>) query.getResultList();}
+        @Override
+        public List<CarLampResponse> getCarLampByPrice(BigDecimal start, BigDecimal end)
+        {
+            Session session = sessionFactory.openSession();
+            session.getTransaction().begin();
+            Query query = session.createQuery("select a from BodyPart a where a.cost >= :start AND a.cost <= :end");
+            query.setParameter("start", start);
+            query.setParameter("end", end);
+            return (List<CarLampResponse>) query.getResultList();
+        }
     @Override
     public CarLampResponse findById(Long lampID)
         {
@@ -44,11 +69,11 @@ public class CarLampRepository implements CarLampsInterface
         }
 
     @Override
-    public void updateLamps(CarLamps lamps)
+    public void updateLamps(CarLamp lamp)
         {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
-        session.update(lamps);
+        session.update(lamp);
         session.getTransaction().commit();
         session.close();
         }
@@ -57,7 +82,7 @@ public class CarLampRepository implements CarLampsInterface
     public void delCarLamps(long id)
         {
         Session session = sessionFactory.openSession();
-        CarLamps lamps = session.get(CarLamps.class, id);
+        CarLamp lamps = session.get(CarLamp.class, id);
         session.getTransaction().begin();
         session.remove(lamps);
         session.close();
