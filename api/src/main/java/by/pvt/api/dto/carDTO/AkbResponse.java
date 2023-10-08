@@ -4,6 +4,7 @@ package by.pvt.api.dto.carDTO;
 import lombok.Builder;
 import lombok.Data;
 
+import javax.persistence.Entity;
 import java.math.BigDecimal;
 
 

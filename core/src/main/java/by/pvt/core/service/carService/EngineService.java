@@ -39,7 +39,7 @@ public class EngineService implements IEngine {
     public List<EngineResponse> getEngineByType(EngineType type)
     {return engineRepository.getEngineByType(type);}
     @Override
-    public List<EngineResponse> getEngineByPrice(BigDecimal start, BigDecimal end)
+    public List<Engine> getEngineByPrice(BigDecimal start, BigDecimal end)
     {return engineRepository.getEngineByPrice(start, end);}
 
     @Override

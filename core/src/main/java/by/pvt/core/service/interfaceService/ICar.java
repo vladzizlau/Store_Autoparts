@@ -25,7 +25,7 @@ public interface ICar {
 
     CarModel modelSearchById(Long id);
 
-    List<CarModelResponse> getModelByBrand(Long id);
+    List<CarModel> getModelByBrand(Long id);
 
     void carDelete(long id);
 

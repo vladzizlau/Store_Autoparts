@@ -12,11 +12,11 @@ public interface Iakb {
 
     List<AkbResponse> getAll();
 
-    List<AkbResponse> getAKBbyVoltage(int volt);
+    List<AKB> getAKBbyVoltage(int volt);
 
     List<AkbResponse> getAKBbyBatteryCapacity(Double capacity);
 
-    List<AkbResponse> getAKBbyPrice(BigDecimal start, BigDecimal end);
+    List<AKB> getAKBbyPrice(BigDecimal start, BigDecimal end);
 
     AkbResponse searchById(long Id);
 

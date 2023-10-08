@@ -2,12 +2,18 @@ package by.pvt.core.repository;
 
 import by.pvt.api.dto.carDTO.CarModelResponse;
 import by.pvt.core.config.HibernateConfig;
+import by.pvt.core.domain.shopDomain.Car;
 import by.pvt.core.domain.shopDomain.CarModel;
 import by.pvt.core.repository.interfaceRepository.CarModelInterface;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
+import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 public class CarModelRepository implements CarModelInterface {
@@ -35,19 +41,28 @@ public class CarModelRepository implements CarModelInterface {
     }
 
     @Override
-    public List<CarModelResponse> getModelByBrand(Long brandId) {
+    public List<CarModel> getModelByBrand(Long brandId) {
+        EntityManager entityManager = sessionFactory.createEntityManager();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<CarModel> criteriaQuery = criteriaBuilder.createQuery(CarModel.class);
+        Root<CarModel> root = criteriaQuery.from(CarModel.class);
+        Join <CarModel, Car> carJoin = root.join("car");
 
-        Session session = sessionFactory.openSession();
-        Query query = session.createQuery("select c from CarModel c where car_id = :brandId");
-        query.setParameter("carId", brandId);
-        return (List<CarModelResponse>) query.getResultList();
+        criteriaQuery.where(criteriaBuilder.equal(carJoin.get("id"), brandId));
+        List<CarModel> u = (List<CarModel>) entityManager.createQuery(criteriaQuery).getResultList();
+        return u;
+
     }
 
     @Override
     public CarModel getModelById(Long modelId) {
-        Session session = sessionFactory.openSession();
-        Query query = session.createQuery("select c from CarModel c where id = :modelId").setParameter("modelId", modelId);
-        return (CarModel) query.getSingleResult();
+        EntityManager entityManager = sessionFactory.createEntityManager();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<CarModel> criteriaQuery = criteriaBuilder.createQuery(CarModel.class);
+        Root<CarModel> root = criteriaQuery.from(CarModel.class);
+
+        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("id"), modelId));
+        return entityManager.createQuery(criteriaQuery).getSingleResult();
     }
     @Override
     public void updateModel(CarModel carmodel) {

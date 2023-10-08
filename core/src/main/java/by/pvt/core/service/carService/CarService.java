@@ -51,7 +51,7 @@ public class CarService implements ICar {
         return  modelRepository.getModelById(id);
     }
     @Override
-    public List<CarModelResponse> getModelByBrand(Long id)
+    public List<CarModel> getModelByBrand(Long id)
     {
         return modelRepository.getModelByBrand(id);
     }

@@ -12,7 +12,7 @@ public interface CarModelInterface {
 
     List<CarModelResponse> getAllModel();
 
-    List<CarModelResponse> getModelByBrand(Long brandId);
+    List<CarModel> getModelByBrand(Long brandId);
 
     CarModel getModelById(Long modelId);
 

@@ -2,7 +2,6 @@ package by.pvt.core;
 
 import by.pvt.core.domain.shopDomain.*;
 import by.pvt.core.repository.*;
-import by.pvt.core.service.carService.CarService;
 import by.pvt.core.service.shopService.UserService;
 import by.pvt.core.domain.User;
 
@@ -19,7 +18,7 @@ public class Main {
 //        addCar();
 //        addBodypart();
 //             deluser();
-        addEngine();
+//        addEngine();
 //            getUsers();
 //        getCars();
 //        searchUser();
@@ -48,10 +47,16 @@ public class Main {
 //                    .shopcart(shopcart)
 //            .build();
 //            orderRepository.addOrder(order1);
-//
 
+        Dz_20 dz_20 = new Dz_20();
 
+//        System.out.println(dz_20.getAKBbyVoltage(12));
+//        System.out.println(dz_20.getAKBbyPrice(new BigDecimal(10), new BigDecimal(250)));
+//        System.out.println(dz_20.getEngineByPrice(new BigDecimal(10), new BigDecimal(1000)));
+//        System.out.println(dz_20.getModelByBrand(1L));
+        System.out.println(dz_20.getTirebySeason(TireType.ALL_SEASON));
     }
+
 
     private static void addAKB() {
 //        AKB akb = AKB.builder()
@@ -187,25 +192,25 @@ public class Main {
                 .build();
         carRepository.addCar(car1);
 
-        CarModel carModel = CarModel.builder()
-                .car(car1)
-                .model("A8")
-                .year(1998)
-                .build();
-        CarModel carModel1 = CarModel.builder()
-                .car(car1)
-                .model("A4")
-                .year(1995)
-                .build();
-        CarModel carModel2 = CarModel.builder()
-                .car(car1)
-                .model("A6")
-                .year(19968)
-                .build();
-        CarModelRepository carModelRepository = new CarModelRepository();
-        carModelRepository.addModel(carModel);
-        carModelRepository.addModel(carModel1);
-        carModelRepository.addModel(carModel2);
+//        CarModel carModel = CarModel.builder()
+//                .car(car1)
+//                .model("A8")
+//                .year(1998)
+//                .build();
+//        CarModel carModel1 = CarModel.builder()
+//                .car(car1)
+//                .model("A4")
+//                .year(1995)
+//                .build();
+//        CarModel carModel2 = CarModel.builder()
+//                .car(car1)
+//                .model("A6")
+//                .year(19968)
+//                .build();
+//        CarModelRepository carModelRepository = new CarModelRepository();
+//        carModelRepository.addModel(carModel);
+//        carModelRepository.addModel(carModel1);
+//        carModelRepository.addModel(carModel2);
 
 
 //        BodyPart bodyPart = BodyPart.builder()

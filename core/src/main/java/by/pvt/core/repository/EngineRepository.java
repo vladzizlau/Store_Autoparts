@@ -2,6 +2,7 @@ package by.pvt.core.repository;
 
 import by.pvt.api.dto.carDTO.EngineResponse;
 import by.pvt.core.config.HibernateConfig;
+import by.pvt.core.domain.shopDomain.AKB;
 import by.pvt.core.domain.shopDomain.Engine;
 import by.pvt.core.domain.shopDomain.EngineType;
 import by.pvt.core.repository.interfaceRepository.EngineInterface;
@@ -9,6 +10,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
+import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -53,13 +58,15 @@ public class EngineRepository implements EngineInterface {
     }
 
     @Override
-    public List<EngineResponse> getEngineByPrice(BigDecimal start, BigDecimal end) {
-        Session session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        Query query = session.createQuery("select a from Engine a where a.cost >= :start AND a.cost <= :end");
-        query.setParameter("start", start);
-        query.setParameter("end", end);
-        return (List<EngineResponse>) query.getResultList();
+    public List<Engine> getEngineByPrice(BigDecimal start, BigDecimal end) {
+        EntityManager entityManager = sessionFactory.createEntityManager();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Engine> criteriaQuery = criteriaBuilder.createQuery(Engine.class);
+        Root<Engine> root = criteriaQuery.from(Engine.class);
+
+        criteriaQuery.select(root).where(criteriaBuilder.and(criteriaBuilder.gt(root.get("cost"), start)),
+                criteriaBuilder.lt(root.get("cost"), end));
+        return entityManager.createQuery(criteriaQuery).getResultList();
     }
 
     @Override

@@ -17,7 +17,7 @@ public interface EngineInterface {
 
     List<EngineResponse> getEngineByType(EngineType type);
 
-    List<EngineResponse> getEngineByPrice(BigDecimal start, BigDecimal end);
+    List<Engine> getEngineByPrice(BigDecimal start, BigDecimal end);
 
     EngineResponse findById(Long engineID);
 

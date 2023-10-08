@@ -3,12 +3,18 @@ package by.pvt.core.repository;
 import by.pvt.api.dto.carDTO.AkbResponse;
 import by.pvt.core.config.HibernateConfig;
 import by.pvt.core.domain.shopDomain.AKB;
+import by.pvt.core.domain.shopDomain.CarModel;
 import by.pvt.core.repository.interfaceRepository.AKBInterface;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
+import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AKBRepository implements AKBInterface {
@@ -37,12 +43,16 @@ public class AKBRepository implements AKBInterface {
     }
 
     @Override
-    public List<AkbResponse> getAKBbyVoltage(int volt) {
-        Session session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        Query query = session.createQuery("select a from AKB a where voltage = :volt").setParameter("volt", volt);
-        return (List<AkbResponse>) query.getResultList();
+    public List<AKB> getAKBbyVoltage(int volt) {
+        EntityManager entityManager = sessionFactory.createEntityManager();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<AKB> criteriaQuery = criteriaBuilder.createQuery(AKB.class);
+        Root<AKB> root = criteriaQuery.from(AKB.class);
+
+        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("voltage"), volt));
+        return entityManager.createQuery(criteriaQuery).getResultList();
     }
+
     @Override
     public List<AkbResponse> getAKBbyBatteryCapacity(Double capacity) {
         Session session = sessionFactory.openSession();
@@ -50,14 +60,17 @@ public class AKBRepository implements AKBInterface {
         Query query = session.createQuery("select a from AKB a where battery_capacity = :capacity").setParameter("capacity", capacity);
         return (List<AkbResponse>) query.getResultList();
     }
+
     @Override
-    public List<AkbResponse> getAKBbyPrice(BigDecimal start, BigDecimal end) {
-        Session session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        Query query = session.createQuery("select a from AKB a where a.price >= :start AND a.price <= :end");
-        query.setParameter("start", start);
-        query.setParameter("end", end);
-        return (List<AkbResponse>) query.getResultList();
+    public List<AKB> getAKBbyPrice(BigDecimal start, BigDecimal end) {
+        EntityManager entityManager = sessionFactory.createEntityManager();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<AKB> criteriaQuery = criteriaBuilder.createQuery(AKB.class);
+        Root<AKB> root = criteriaQuery.from(AKB.class);
+
+        criteriaQuery.select(root).where(criteriaBuilder.and(criteriaBuilder.gt(root.get("price"), start)),
+                criteriaBuilder.lt(root.get("price"), end));
+        return entityManager.createQuery(criteriaQuery).getResultList();
     }
 
     @Override

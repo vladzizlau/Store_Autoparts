@@ -1,4 +1,6 @@
 package by.pvt.core.config;
+
+import by.pvt.api.dto.carDTO.AkbResponse;
 import by.pvt.core.domain.Comments;
 import by.pvt.core.domain.Order;
 import by.pvt.core.domain.Shopcart;
@@ -44,6 +46,7 @@ public class HibernateConfig {
         configuration.addAnnotatedClass(ManufacturerTires.class);
         configuration.addAnnotatedClass(Tire.class);
         configuration.addAnnotatedClass(Comments.class);
+
         configuration.setProperties(properties);
         standardServiceRegistryBuilder = new StandardServiceRegistryBuilder();
         standardServiceRegistryBuilder.applySettings(properties);

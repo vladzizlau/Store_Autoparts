@@ -31,7 +31,7 @@ public class AkbService implements Iakb {
         return akbRepository.getAllAKB();
     }
     @Override
-    public List<AkbResponse> getAKBbyVoltage(int volt){
+    public List<AKB> getAKBbyVoltage(int volt){
         return akbRepository.getAKBbyVoltage(volt);
     }
     @Override
@@ -39,7 +39,7 @@ public class AkbService implements Iakb {
         return akbRepository.getAKBbyBatteryCapacity(capacity);
     }
     @Override
-    public List<AkbResponse> getAKBbyPrice(BigDecimal start, BigDecimal end) {
+    public List<AKB> getAKBbyPrice(BigDecimal start, BigDecimal end) {
         return akbRepository.getAKBbyPrice(start, end);
     }
 

@@ -6,10 +6,14 @@ import by.pvt.core.config.HibernateConfig;
 import by.pvt.core.domain.shopDomain.Tire;
 import by.pvt.core.domain.shopDomain.TireType;
 import by.pvt.core.repository.interfaceRepository.TiresInterface;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 
+import javax.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -57,10 +61,12 @@ public class TiresRepository implements TiresInterface
             return (List<TireResponse>) query.getResultList();
         }
         public List<TireResponse> getTirebySeason(TireType type) {
-            Session session = sessionFactory.openSession();
-            session.getTransaction().begin();
-            Query query = session.createQuery("select a from Tire a where season = :season").setParameter("season", type);
-            return (List<TireResponse>) query.getResultList();
+            DetachedCriteria dc = DetachedCriteria.forClass(Tire.class);
+            dc.add(Restrictions.eq("season", type));
+            EntityManager entityManager = sessionFactory.createEntityManager();
+            Session session = entityManager.unwrap(Session.class);
+            Criteria criteria = dc.getExecutableCriteria(session);
+            return (List<TireResponse>) criteria.list();
         }
 
         public List<TireResponse> getTireByPrice(BigDecimal start, BigDecimal end) {
