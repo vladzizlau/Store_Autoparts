@@ -2,7 +2,6 @@ package by.pvt.core.repository;
 
 import by.pvt.api.dto.carDTO.EngineResponse;
 import by.pvt.core.config.HibernateConfig;
-import by.pvt.core.domain.shopDomain.AKB;
 import by.pvt.core.domain.shopDomain.Engine;
 import by.pvt.core.domain.shopDomain.EngineType;
 import by.pvt.core.repository.interfaceRepository.EngineInterface;

@@ -1,6 +1,5 @@
 package by.pvt.core.repository;
 
-import by.pvt.api.dto.carDTO.AkbResponse;
 import by.pvt.api.dto.carDTO.TireResponse;
 import by.pvt.core.config.HibernateConfig;
 import by.pvt.core.domain.shopDomain.Tire;

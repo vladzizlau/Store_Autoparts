@@ -1,6 +1,5 @@
 package by.pvt.core.config;
 
-import by.pvt.api.dto.carDTO.AkbResponse;
 import by.pvt.core.domain.Comments;
 import by.pvt.core.domain.Order;
 import by.pvt.core.domain.Shopcart;
@@ -21,7 +20,7 @@ public class HibernateConfig {
     static {
         Properties properties = new Properties();
 
-        properties.setProperty("hibernate.hbm2ddl.auto", "none");
+        properties.setProperty("hibernate.hbm2ddl.auto", "update");
         properties.setProperty("hibernate.format_sql", "true");
         properties.setProperty("hibernate.use_sql_comments", "true");
         properties.setProperty("hibernate.show_sql", "true");
@@ -31,7 +30,11 @@ public class HibernateConfig {
         properties.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/autoparts"); //autoparts
         properties.setProperty("hibernate.connection.username", "postgres");
         properties.setProperty("hibernate.connection.password", "sa");
-
+        // Подключение КЭШа 2-ого уровня
+        properties.setProperty("hibernate.cache.use_second_level_cache", "true");
+        properties.setProperty("hibernate.cache.use_query_cache", "true");
+        properties.setProperty("hibernate.cache.region.factory_class", "org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory");
+        //----
         configuration = new Configuration();
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Order.class);
@@ -54,7 +57,6 @@ public class HibernateConfig {
     }
 
     public static SessionFactory getSessionFactory() {
-        SessionFactory sessionFactory = configuration.buildSessionFactory(standardServiceRegistryBuilder.build());
-        return sessionFactory;
+        return configuration.buildSessionFactory(standardServiceRegistryBuilder.build());
     }
 }

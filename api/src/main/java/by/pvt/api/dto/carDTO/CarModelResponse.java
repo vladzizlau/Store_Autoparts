@@ -3,7 +3,6 @@ package by.pvt.api.dto.carDTO;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.Table;
 
 @Data
 @Builder

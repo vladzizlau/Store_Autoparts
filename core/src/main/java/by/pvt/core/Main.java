@@ -1,9 +1,12 @@
 package by.pvt.core;
 
+import by.pvt.core.config.HibernateConfig;
 import by.pvt.core.domain.shopDomain.*;
 import by.pvt.core.repository.*;
 import by.pvt.core.service.shopService.UserService;
 import by.pvt.core.domain.User;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -11,6 +14,8 @@ import java.time.Month;
 
 public class Main {
     private final static UserService userService = new UserService();
+    static SessionFactory sessionFactory = HibernateConfig.getSessionFactory();
+
 
 
     public static void main(String[] args) {
@@ -48,13 +53,24 @@ public class Main {
 //            .build();
 //            orderRepository.addOrder(order1);
 
-        Dz_20 dz_20 = new Dz_20();
+//        Dz_20 dz_20 = new Dz_20();
 
 //        System.out.println(dz_20.getAKBbyVoltage(12));
 //        System.out.println(dz_20.getAKBbyPrice(new BigDecimal(10), new BigDecimal(250)));
 //        System.out.println(dz_20.getEngineByPrice(new BigDecimal(10), new BigDecimal(1000)));
 //        System.out.println(dz_20.getModelByBrand(1L));
-        System.out.println(dz_20.getTirebySeason(TireType.ALL_SEASON));
+//        System.out.println(dz_20.getTirebySeason(TireType.ALL_SEASON));
+
+        Session session = sessionFactory.openSession();
+        org.hibernate.query.Query query = session.createQuery("Select c from Car c");
+        Car car = session.load(Car.class, 1L);
+        System.out.println(car);
+        session.close();
+
+        Session session3 = sessionFactory.openSession();
+        Car car1 = session3.load(Car.class, 1L);
+        System.out.println(car1);
+        session.close();
     }
 
 
