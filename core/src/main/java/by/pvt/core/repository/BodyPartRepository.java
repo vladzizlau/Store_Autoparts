@@ -7,10 +7,11 @@ import by.pvt.core.repository.interfaceRepository.BodyPartInterface;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.List;
-
+@Repository
 public class BodyPartRepository implements BodyPartInterface
     {
     private final SessionFactory sessionFactory;

@@ -3,6 +3,7 @@ package by.pvt.core.domain.shopDomain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Data
 @Builder
@@ -13,7 +14,7 @@ import javax.persistence.*;
 public class CarModel {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String model;
     private int year;
@@ -23,5 +24,16 @@ public class CarModel {
     @JoinColumn(name = "car_id")
     private Car car;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CarModel carModel = (CarModel) o;
+        return Objects.equals(id, carModel.id);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

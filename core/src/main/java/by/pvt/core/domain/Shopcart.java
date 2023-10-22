@@ -10,6 +10,7 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 //Корзина
 @Data
@@ -18,7 +19,7 @@ import java.math.BigDecimal;
 @Table(schema = "parts", name = "shopcart")
 public class Shopcart {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String status;
     private BigDecimal cost;
@@ -49,4 +50,17 @@ public class Shopcart {
     @EqualsAndHashCode.Exclude
     @JoinColumn(name = "tire_id")
     private Tire tire;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Shopcart shopcart = (Shopcart) o;
+        return Objects.equals(id, shopcart.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

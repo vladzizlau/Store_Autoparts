@@ -7,9 +7,10 @@ import by.pvt.core.repository.interfaceRepository.ShopcartInterface;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public class ShopCartRepository implements ShopcartInterface
     {
     private final SessionFactory sessionFactory;

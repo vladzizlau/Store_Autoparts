@@ -15,41 +15,41 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class Dz_20 {
-    private final CarService carService;
-    private final AkbService akbService;
-    private final EngineService engineService;
-    private final TiresService tiresService;
+//    private final CarService carService;
+//    private final AkbService akbService;
+//    private final EngineService engineService;
+//    private final TiresService tiresService;
 
     public Dz_20() {
-        carService = new CarService();
-        akbService = new AkbService();
-        engineService = new EngineService();
-        tiresService = new TiresService();
+//        carService = new CarService();
+//        akbService = new AkbService();
+//        engineService = new EngineService();
+//        tiresService = new TiresService();
     }
 
-    public CarModel getModelById(Long modelId) {
-        return carService.modelSearchById(modelId);
-    }
-
-    public List<AKB> getAKBbyVoltage(int volt) {
-        return akbService.getAKBbyVoltage(volt);
-    }
-
-    public List<AKB> getAKBbyPrice(BigDecimal start, BigDecimal end) {
-        return akbService.getAKBbyPrice(start, end);
-    }
-
-    public List<Engine> getEngineByPrice(BigDecimal start, BigDecimal end) {
-        return engineService.getEngineByPrice(start, end);
-    }
-
-    //C join
-    public List<CarModel> getModelByBrand(Long brandId) {
-        return carService.getModelByBrand(brandId);
-    }
-
-    //Detached
-    public List<TireResponse> getTirebySeason(TireType type) {
-        return tiresService.getTirebySeason(type);
-    }
+//    public CarModel getModelById(Long modelId) {
+//        return carService.modelSearchById(modelId);
+//    }
+//
+//    public List<AKB> getAKBbyVoltage(int volt) {
+//        return akbService.getAKBbyVoltage(volt);
+//    }
+//
+//    public List<AKB> getAKBbyPrice(BigDecimal start, BigDecimal end) {
+//        return akbService.getAKBbyPrice(start, end);
+//    }
+//
+//    public List<Engine> getEngineByPrice(BigDecimal start, BigDecimal end) {
+//        return engineService.getEngineByPrice(start, end);
+//    }
+//
+//    //C join
+//    public List<CarModel> getModelByBrand(Long brandId) {
+//        return carService.getModelByBrand(brandId);
+//    }
+//
+//    //Detached
+//    public List<TireResponse> getTirebySeason(TireType type) {
+//        return tiresService.getTirebySeason(type);
+//    }
 }

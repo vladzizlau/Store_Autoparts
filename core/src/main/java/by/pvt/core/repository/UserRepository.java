@@ -7,9 +7,10 @@ import by.pvt.core.repository.interfaceRepository.UserInterface;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public class UserRepository implements UserInterface
     {
     private final SessionFactory sessionFactory;

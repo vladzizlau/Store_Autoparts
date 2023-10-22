@@ -7,9 +7,10 @@ import by.pvt.core.repository.interfaceRepository.OrderInterface;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public class OrderRepository implements OrderInterface
     {
     private final SessionFactory sessionFactory;

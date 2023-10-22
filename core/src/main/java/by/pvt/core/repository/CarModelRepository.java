@@ -8,6 +8,7 @@ import by.pvt.core.repository.interfaceRepository.CarModelInterface;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -15,7 +16,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 import java.util.List;
-
+@Repository
 public class CarModelRepository implements CarModelInterface {
     private final SessionFactory sessionFactory;
 

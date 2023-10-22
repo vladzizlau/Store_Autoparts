@@ -4,24 +4,26 @@ import by.pvt.api.dto.shopDTO.CommentRequest;
 import by.pvt.api.dto.shopDTO.CommentResponse;
 import by.pvt.core.convert.CommentConverter;
 import by.pvt.core.domain.Comments;
+import by.pvt.core.mapper.CommentMapper;
 import by.pvt.core.repository.CommentRepository;
 import by.pvt.core.service.interfaceService.IComment;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class CommentService implements IComment {
     private final CommentRepository commentRepository;
-    private final CommentConverter commentConverter;
+    private CommentMapper commentMapper;
 
-    public CommentService() {
-        commentRepository = new CommentRepository();
-        commentConverter = new CommentConverter();
+    public CommentService(CommentRepository cr) {
+        commentRepository = cr;
+
     }
 
     @Override
     public void addcomment(CommentRequest comm)
     {
-        commentRepository.addcomment(commentConverter.toEntity(comm));
+        commentRepository.addcomment(commentMapper.toEntity(comm));
     }
 
     @Override
@@ -42,7 +44,7 @@ public class CommentService implements IComment {
 
     @Override
     public void editComment(CommentRequest req) {
-        Comments comment = commentConverter.toEntity(req);
+        Comments comment = commentMapper.toEntity(req);
         comment.setDateComment(req.getDateComment());
         comment.setText(req.getText());
 

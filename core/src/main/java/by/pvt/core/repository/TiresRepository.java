@@ -11,11 +11,12 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.util.List;
-
+@Repository
 public class TiresRepository implements TiresInterface
     {
     private final SessionFactory sessionFactory;

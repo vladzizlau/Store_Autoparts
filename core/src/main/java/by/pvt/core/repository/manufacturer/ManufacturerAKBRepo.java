@@ -6,9 +6,10 @@ import by.pvt.core.domain.shopDomain.ManufacturerAKB;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public class ManufacturerAKBRepo implements IManufacturerAKB
     {
     private final SessionFactory sessionFactory;

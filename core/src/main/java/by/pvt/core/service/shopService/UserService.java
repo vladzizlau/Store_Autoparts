@@ -4,26 +4,27 @@ import by.pvt.api.dto.shopDTO.UserRequest;
 import by.pvt.api.dto.shopDTO.UserResponse;
 import by.pvt.core.convert.UserConvert;
 import by.pvt.core.domain.User;
+import by.pvt.core.mapper.UserMapper;
 import by.pvt.core.repository.UserRepository;
 import by.pvt.core.service.interfaceService.IUser;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
-
+@Service
 public class UserService implements IUser {
 
     private final UserRepository userRepository;
-    private final UserConvert userConvert;
+    private UserMapper userMapper;
 
-    public UserService() {
-        userRepository = new UserRepository();
-        userConvert = new UserConvert();
+    public UserService(UserRepository userR) {
+        userRepository = userR;
     }
 
     @Override
     public void addUser(UserRequest user) {
-        userRepository.addUser(userConvert.userToEntity(user));
+        userRepository.addUser(userMapper.toEntity(user));
     }
 
     @Override
@@ -42,7 +43,7 @@ public class UserService implements IUser {
 
     @Override
     public void editUser(UserRequest updateUser) {
-        User user = userConvert.userToEntity(updateUser);
+        User user = userMapper.toEntity(updateUser);
         user.setAge(updateUser.getAge());
         user.setAmountSum(updateUser.getAmountSum());
         user.setFirstName(updateUser.getFirstName());

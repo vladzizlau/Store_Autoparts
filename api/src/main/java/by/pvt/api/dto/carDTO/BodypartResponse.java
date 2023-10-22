@@ -11,7 +11,6 @@ public class BodypartResponse {
     private long id;
     private String name;
     private String carBrand;
-    private String carModel;
     private int count;
     private BigDecimal cost;
 }

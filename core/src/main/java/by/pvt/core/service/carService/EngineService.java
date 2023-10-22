@@ -7,25 +7,26 @@ import by.pvt.core.convert.EngineConvert;
 import by.pvt.core.domain.shopDomain.Engine;
 import by.pvt.core.domain.shopDomain.EngineType;
 import by.pvt.core.domain.shopDomain.TireType;
+import by.pvt.core.mapper.EngineMapper;
 import by.pvt.core.repository.EngineRepository;
 import by.pvt.core.service.interfaceService.IEngine;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
-
+@Service
 public class EngineService implements IEngine {
     private final EngineRepository engineRepository;
-    private final EngineConvert engineConvert;
+    private EngineMapper engineMapper;
 
 
-    public EngineService() {
-        engineRepository = new EngineRepository();
-        engineConvert = new EngineConvert();
+    public EngineService(EngineRepository repository) {
+        engineRepository = repository;
     }
 
     @Override
     public void add(EngineRequest engine) {
-        engineRepository.addEngine(engineConvert.toEntity(engine));
+        engineRepository.addEngine(engineMapper.toEntity(engine));
     }
 
     @Override
@@ -54,7 +55,7 @@ public class EngineService implements IEngine {
 
     @Override
     public void edit(EngineRequest e) {
-        Engine engine = engineConvert.toEntity(e);
+        Engine engine = engineMapper.toEntity(e);
         engine.setType(EngineType.valueOf(e.getType()));
         engine.setEngineCapacity(e.getEngineCapacity());
         engine.setCount(e.getCount());

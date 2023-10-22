@@ -5,24 +5,25 @@ import by.pvt.api.dto.carDTO.TireResponse;
 import by.pvt.core.convert.TiresConvert;
 import by.pvt.core.domain.shopDomain.TireType;
 import by.pvt.core.domain.shopDomain.Tire;
+import by.pvt.core.mapper.TiresMapper;
 import by.pvt.core.repository.TiresRepository;
 import by.pvt.core.service.interfaceService.ITires;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
-
+@Service
 public class TiresService implements ITires {
     private final TiresRepository tiresRepository;
-    private final TiresConvert tiresConvert;
+    private TiresMapper tiresMapper;
 
-    public TiresService() {
-        tiresRepository = new TiresRepository();
-        tiresConvert = new TiresConvert();
+    public TiresService(TiresRepository tr) {
+        tiresRepository = tr;
     }
 
     @Override
     public void add(TireRequest tires) {
-        tiresRepository.addTires(tiresConvert.toEntity(tires));
+        tiresRepository.addTires(tiresMapper.toEntity(tires));
     }
 
     @Override
@@ -43,7 +44,7 @@ public class TiresService implements ITires {
 
     @Override
     public void edit(TireRequest t) {
-        Tire tire = tiresConvert.toEntity(t);
+        Tire tire = tiresMapper.toEntity(t);
         tire.setName(t.getName());
         tire.setProfile_width(t.getProfileWidth());
         tire.setProfile_height(t.getProfileHeight());

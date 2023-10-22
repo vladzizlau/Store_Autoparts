@@ -13,7 +13,6 @@ import java.time.LocalDate;
 import java.time.Month;
 
 public class Main {
-    private final static UserService userService = new UserService();
     static SessionFactory sessionFactory = HibernateConfig.getSessionFactory();
 
 
@@ -61,16 +60,20 @@ public class Main {
 //        System.out.println(dz_20.getModelByBrand(1L));
 //        System.out.println(dz_20.getTirebySeason(TireType.ALL_SEASON));
 
-        Session session = sessionFactory.openSession();
-        org.hibernate.query.Query query = session.createQuery("Select c from Car c");
-        Car car = session.load(Car.class, 1L);
-        System.out.println(car);
-        session.close();
+//        Session session = sessionFactory.openSession();
+//        org.hibernate.query.Query query = session.createQuery("Select c from Car c");
+//        Car car = session.load(Car.class, 1L);
+//        System.out.println(car);
+//        session.close();
+//
+//        Session session3 = sessionFactory.openSession();
+//        Car car1 = session3.load(Car.class, 1L);
+//        System.out.println(car1);
+//        session.close();
+UserRepository ur = new UserRepository();
+UserService us = new UserService(ur);
+        System.out.println(us.getAllUsers());
 
-        Session session3 = sessionFactory.openSession();
-        Car car1 = session3.load(Car.class, 1L);
-        System.out.println(car1);
-        session.close();
     }
 
 
@@ -119,6 +122,8 @@ public class Main {
     }
 
     public static void addUSer() {
+        UserRepository ur = new UserRepository();
+        UserService userService = new UserService(ur);
         User user1 = User.builder()
                 .id(1L)
                 .age(23)
@@ -178,21 +183,21 @@ public class Main {
     }
 
     private static void deluser() {
-        userService.delUser(1);
-        userService.delUser(2);
-        userService.delUser(3);
-        userService.delUser(4);
-        userService.delUser(5);
+//        userService.delUser(1);
+//        userService.delUser(2);
+//        userService.delUser(3);
+//        userService.delUser(4);
+//        userService.delUser(5);
     }
 
-    private static void getUsers() {
-        System.out.println(userService.getAllUsers());
-    }
-
-    private static void searchUser() {
-
-        System.out.println(userService.searchById(2));
-    }
+//    private static void getUsers() {
+//        System.out.println(userService.getAllUsers());
+//    }
+//
+//    private static void searchUser() {
+//
+//        System.out.println(userService.searchById(2));
+//    }
 
     private static void editUSer() {
 

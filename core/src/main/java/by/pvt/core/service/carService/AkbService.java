@@ -4,26 +4,27 @@ import by.pvt.api.dto.carDTO.AkbRequest;
 import by.pvt.api.dto.carDTO.AkbResponse;
 import by.pvt.core.convert.AKBConvert;
 import by.pvt.core.domain.shopDomain.AKB;
+import by.pvt.core.mapper.AkbMapper;
 import by.pvt.core.repository.AKBRepository;
 import by.pvt.core.service.interfaceService.Iakb;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
-
+@Service
 public class AkbService implements Iakb {
 
     private final AKBRepository akbRepository;
-    private final AKBConvert akbConvert;
+    private AkbMapper akbMapper;
 
-    public AkbService() {
-        akbRepository = new AKBRepository();
-        akbConvert = new AKBConvert();
+    public AkbService(AKBRepository repository) {
+        akbRepository = repository;
     }
 
 
     @Override
     public void add(AkbRequest akb) {
-        akbRepository.addAKB(akbConvert.akbtoEntity(akb));
+        akbRepository.addAKB(akbMapper.toEntity(akb));
     }
 
     @Override
@@ -56,7 +57,7 @@ public class AkbService implements Iakb {
 
     @Override
     public void edit(AkbRequest a) {
-        AKB akb = akbConvert.akbtoEntity(a);
+        AKB akb = akbMapper.toEntity(a);
         akb.setName(a.getName());
         akb.setVoltage(a.getVoltage());
         akb.setBattery_capacity(a.getBatteryCapacity());

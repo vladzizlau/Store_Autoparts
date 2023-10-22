@@ -8,6 +8,7 @@ import by.pvt.core.repository.interfaceRepository.AKBInterface;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -16,7 +17,7 @@ import javax.persistence.criteria.Root;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
+@Repository
 public class AKBRepository implements AKBInterface {
 
     private final SessionFactory sessionFactory;

@@ -6,9 +6,10 @@ import by.pvt.core.domain.shopDomain.ManufacturerTires;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public class ManufacturerTiresRepo implements IManufacturerTires
     {
     private final SessionFactory sessionFactory;

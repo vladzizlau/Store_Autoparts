@@ -31,9 +31,9 @@ public class HibernateConfig {
         properties.setProperty("hibernate.connection.username", "postgres");
         properties.setProperty("hibernate.connection.password", "sa");
         // Подключение КЭШа 2-ого уровня
-        properties.setProperty("hibernate.cache.use_second_level_cache", "true");
-        properties.setProperty("hibernate.cache.use_query_cache", "true");
-        properties.setProperty("hibernate.cache.region.factory_class", "org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory");
+//        properties.setProperty("hibernate.cache.use_second_level_cache", "true");
+//        properties.setProperty("hibernate.cache.use_query_cache", "true");
+//        properties.setProperty("hibernate.cache.region.factory_class", "org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory");
         //----
         configuration = new Configuration();
         configuration.addAnnotatedClass(User.class);

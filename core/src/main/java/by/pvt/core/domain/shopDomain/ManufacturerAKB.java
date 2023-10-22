@@ -5,11 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @Builder
@@ -17,6 +15,7 @@ import java.util.List;
 @Table(schema = "parts", name = "manufacturer_akb")
 public class ManufacturerAKB {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
@@ -24,4 +23,16 @@ public class ManufacturerAKB {
     @OneToMany(mappedBy = "manufacturerAKB")
     private List<AKB> akb;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ManufacturerAKB that = (ManufacturerAKB) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

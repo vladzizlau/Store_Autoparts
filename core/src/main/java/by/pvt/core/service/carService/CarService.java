@@ -7,31 +7,32 @@ import by.pvt.api.dto.carDTO.CarResponse;
 import by.pvt.core.convert.CarConvert;
 import by.pvt.core.domain.shopDomain.Car;
 import by.pvt.core.domain.shopDomain.CarModel;
+import by.pvt.core.mapper.CarMapper;
 import by.pvt.core.repository.CarModelRepository;
 import by.pvt.core.repository.CarRepository;
 import by.pvt.core.service.interfaceService.ICar;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class CarService implements ICar {
     private final CarRepository carRepository;
     private final CarModelRepository modelRepository;
-    private final CarConvert carConvert;
+    private CarMapper carMapper;
 
 
-    public CarService() {
-        carRepository = new CarRepository();
-        modelRepository = new CarModelRepository();
-        carConvert = new CarConvert();
+    public CarService(CarRepository cr, CarModelRepository cmr) {
+        carRepository = cr;
+        modelRepository = cmr;
     }
 
     @Override
     public void addCar(CarRequest car) {
-        carRepository.addCar(carConvert.carToEntity(car));
+        carRepository.addCar(carMapper.carToEntity(car));
     }
     @Override
     public void addModel(CarModelRequest model) {
-        modelRepository.addModel(carConvert.modelToEntity(model));
+        modelRepository.addModel(carMapper.modelToEntity(model));
     }
     @Override
     public List<CarResponse> getAllCar() {
@@ -66,7 +67,7 @@ public class CarService implements ICar {
     }
     @Override
     public void carEdit(CarRequest c) {
-        Car car = carConvert.carToEntity(c);
+        Car car = carMapper.carToEntity(c);
         car.setId(car.getId());
         car.setBrand(car.getBrand());
         carRepository.updateCar(car);
@@ -75,7 +76,7 @@ public class CarService implements ICar {
     @Override
     public void modelEdit(CarModelRequest c)
     {
-        CarModel model = carConvert.modelToEntity(c);
+        CarModel model = carMapper.modelToEntity(c);
         model.setId(c.getId());
         model.setModel(c.getModel());
         model.setYear(c.getYear());
