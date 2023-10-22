@@ -7,16 +7,15 @@ import by.pvt.core.repository.interfaceRepository.OrderInterface;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
 public class OrderRepository implements OrderInterface
     {
-    private final SessionFactory sessionFactory;
-    public OrderRepository() {
-    sessionFactory = HibernateConfig.getSessionFactory();
-    }
+        @Autowired
+    private SessionFactory sessionFactory;
     @Override
     public void addOrder(Order order)
         {

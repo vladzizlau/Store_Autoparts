@@ -1,13 +1,13 @@
 package by.pvt.core.repository;
 
 import by.pvt.api.dto.carDTO.AkbResponse;
-import by.pvt.core.config.HibernateConfig;
 import by.pvt.core.domain.shopDomain.AKB;
-import by.pvt.core.domain.shopDomain.CarModel;
 import by.pvt.core.repository.interfaceRepository.AKBInterface;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -17,13 +17,14 @@ import javax.persistence.criteria.Root;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+
 @Repository
 public class AKBRepository implements AKBInterface {
 
-    private final SessionFactory sessionFactory;
+    @Autowired
+    SessionFactory sessionFactory;
 
     public AKBRepository() {
-        sessionFactory = HibernateConfig.getSessionFactory();
     }
 
     @Override

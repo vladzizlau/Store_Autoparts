@@ -12,7 +12,7 @@ import by.pvt.core.service.shopService.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-
+//Lesson 24
 @Configuration
 @ComponentScan("by.pvt.core")
 public class BeanConfig {

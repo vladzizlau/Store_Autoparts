@@ -1,19 +1,23 @@
 package by.pvt.core;
 
 import by.pvt.core.config.HibernateConfig;
+import by.pvt.core.config.PropertiesConfig;
 import by.pvt.core.domain.shopDomain.*;
 import by.pvt.core.repository.*;
+import by.pvt.core.service.carService.AkbService;
 import by.pvt.core.service.shopService.UserService;
 import by.pvt.core.domain.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Month;
 
 public class Main {
-    static SessionFactory sessionFactory = HibernateConfig.getSessionFactory();
+//    static SessionFactory sessionFactory = HibernateConfig.getSessionFactory();
 
 
 
@@ -70,9 +74,14 @@ public class Main {
 //        Car car1 = session3.load(Car.class, 1L);
 //        System.out.println(car1);
 //        session.close();
-UserRepository ur = new UserRepository();
-UserService us = new UserService(ur);
-        System.out.println(us.getAllUsers());
+//UserRepository ur = new UserRepository();
+//UserService us = new UserService(ur);
+//        System.out.println(us.getAllUsers());
+
+        ApplicationContext ac = new AnnotationConfigApplicationContext(PropertiesConfig.class);
+        AkbService us = ac.getBean(AkbService.class);
+        System.out.println(us.getAll());
+
 
     }
 

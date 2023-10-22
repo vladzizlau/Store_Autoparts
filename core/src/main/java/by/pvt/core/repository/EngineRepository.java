@@ -8,6 +8,7 @@ import by.pvt.core.repository.interfaceRepository.EngineInterface;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -18,11 +19,8 @@ import java.math.BigDecimal;
 import java.util.List;
 @Repository
 public class EngineRepository implements EngineInterface {
-    private final SessionFactory sessionFactory;
-
-    public EngineRepository() {
-        sessionFactory = HibernateConfig.getSessionFactory();
-    }
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @Override
     public void addEngine(Engine engine) {
