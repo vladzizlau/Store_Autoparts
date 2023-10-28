@@ -3,7 +3,9 @@ package by.pvt.core.service.interfaceService;
 
 import by.pvt.api.dto.carDTO.TireRequest;
 import by.pvt.api.dto.carDTO.TireResponse;
+import by.pvt.core.domain.shopDomain.TireType;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface ITires {
@@ -16,4 +18,14 @@ public interface ITires {
     void delete(long id);
 
     void edit(TireRequest tires);
+
+    List<TireResponse> getTirebyDiametr(int d);
+
+    List<TireResponse> getTirebyWidth(int w);
+
+    List<TireResponse> getTirebyHeight(int h);
+
+    List<TireResponse> getTirebySeason(TireType type);
+
+    List<TireResponse> getTirebyPrice(BigDecimal start, BigDecimal end);
 }

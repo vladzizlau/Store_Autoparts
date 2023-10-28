@@ -2,43 +2,43 @@ package by.pvt.core.service.shopService;
 
 import by.pvt.api.dto.shopDTO.UserRequest;
 import by.pvt.api.dto.shopDTO.UserResponse;
-import by.pvt.core.convert.UserConvert;
 import by.pvt.core.domain.User;
 import by.pvt.core.mapper.UserMapper;
-import by.pvt.core.repository.UserRepository;
+import by.pvt.core.repository.UserRepo;
 import by.pvt.core.service.interfaceService.IUser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class UserService implements IUser {
-
-    private final UserRepository userRepository;
+@Autowired
+    private UserRepo userRepository;
+@Autowired
     private UserMapper userMapper;
 
-    public UserService(UserRepository userR) {
-        userRepository = userR;
-    }
 
     @Override
     public void addUser(UserRequest user) {
-        userRepository.addUser(userMapper.toEntity(user));
+        userRepository.save(userMapper.toEntity(user));
     }
 
     @Override
     public List<UserResponse> getAllUsers() {
-        return userRepository.getAllUsers();
+        return userMapper.toResponseList(userRepository.findAll());
     }
 
     @Override
     public UserResponse searchById(long userId) {
-    return userRepository.findById(userId);   }
+        Optional<User> byId = userRepository.findById(userId);
+    return userMapper.toResponse(byId.get());
+    }
 
     @Override
     public void delUser(long id) {
-        userRepository.delUser(id);
+        userRepository.deleteById(id);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class UserService implements IUser {
         user.setLastVisitDate(updateUser.getLastVisitDate());
         user.setPhoneNumber(updateUser.getPhoneNumber());
         user.setSurName(updateUser.getSurName());
-        userRepository.updateUser(user);
+        userRepository.save(user);
     }
 
 

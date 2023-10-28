@@ -1,58 +1,60 @@
 package by.pvt.core.service.carService;
 
+
 import by.pvt.api.dto.carDTO.AkbRequest;
 import by.pvt.api.dto.carDTO.AkbResponse;
-import by.pvt.core.convert.AKBConvert;
 import by.pvt.core.domain.shopDomain.AKB;
 import by.pvt.core.mapper.AkbMapper;
-import by.pvt.core.repository.AKBRepository;
-import by.pvt.core.service.interfaceService.Iakb;
+import by.pvt.core.repository.AKBRepo;
+import by.pvt.core.service.interfaceService.IAkbService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
+
 @Service
-public class AkbService implements Iakb {
+public class AkbService implements IAkbService {
 
-    private final AKBRepository akbRepository;
+    @Autowired
     private AkbMapper akbMapper;
+    @Autowired
+    private AKBRepo akbRepository;
 
-    public AkbService(AKBRepository repository) {
-        akbRepository = repository;
-    }
-
-
-    @Override
-    public void add(AkbRequest akb) {
-        akbRepository.addAKB(akbMapper.toEntity(akb));
-    }
-
+public void add(AkbRequest request){
+    akbRepository.save(akbMapper.toEntity(request));
+}
     @Override
     public List<AkbResponse> getAll() {
-        return akbRepository.getAllAKB();
+        List<AKB> lstAKB = akbRepository.findAll();
+        List<AkbResponse> lstR = akbMapper.toListResponse(lstAKB);
+        return lstR;
     }
     @Override
     public List<AKB> getAKBbyVoltage(int volt){
-        return akbRepository.getAKBbyVoltage(volt);
+        return akbRepository.findByVoltage(volt);
     }
-    @Override
+//    @Override
     public List<AkbResponse> getAKBbyBatteryCapacity(Double capacity){
-        return akbRepository.getAKBbyBatteryCapacity(capacity);
+        List<AKB> lstAKB = akbRepository.findByBatteryCapacity(capacity);
+        return akbMapper.toListResponse(lstAKB);
     }
     @Override
     public List<AKB> getAKBbyPrice(BigDecimal start, BigDecimal end) {
-        return akbRepository.getAKBbyPrice(start, end);
+        return akbRepository.findAKBPriceAndPrice(start, end) ;
     }
 
     @Override
     public AkbResponse searchById(long id) {
-        return akbRepository.findById(id);
+        Optional<AKB> getById = akbRepository.findById(id);
+        return akbMapper.toResponse(getById.get());
     }
 
 
     @Override
     public void delete(long id) {
-        akbRepository.delAKB(id);
+        akbRepository.deleteById(id);
     }
 
     @Override
@@ -60,14 +62,13 @@ public class AkbService implements Iakb {
         AKB akb = akbMapper.toEntity(a);
         akb.setName(a.getName());
         akb.setVoltage(a.getVoltage());
-        akb.setBattery_capacity(a.getBatteryCapacity());
+        akb.setBatteryCapacity(a.getBatteryCapacity());
         akb.setElectric_current(a.getElectricCurrent());
         akb.setLength(a.getLength());
         akb.setWidth(a.getWidth());
         akb.setHeight(a.getHeight());
         akb.setPrice(a.getPrice());
-        akbRepository.updateAKB(akb);
-
+        akbRepository.save(akb);
     }
 }
 

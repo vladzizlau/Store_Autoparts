@@ -13,6 +13,7 @@ public class ShopcartRequest {
     private Long orderId;
     private String status;
     private BigDecimal cost;
+    private Integer count;
 
 
 }

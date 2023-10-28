@@ -3,7 +3,7 @@ package by.pvt.core.domain.shopDomain;
 import by.pvt.core.domain.Shopcart;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -19,7 +19,7 @@ public class AKB {
     private Long id;
     private String name;
     private Integer voltage; //12v или 24v
-    private Double battery_capacity; // емкость
+    private Double batteryCapacity; // емкость
     private Integer electric_current; //Электрический ток, Ампер
     private Integer length;
     private Integer width;

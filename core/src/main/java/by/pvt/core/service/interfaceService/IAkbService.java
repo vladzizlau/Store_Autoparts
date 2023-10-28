@@ -7,20 +7,16 @@ import by.pvt.core.domain.shopDomain.AKB;
 import java.math.BigDecimal;
 import java.util.List;
 
-public interface Iakb {
-    void add(AkbRequest akb);
-
+public interface IAkbService {
     List<AkbResponse> getAll();
 
     List<AKB> getAKBbyVoltage(int volt);
 
-    List<AkbResponse> getAKBbyBatteryCapacity(Double capacity);
-
     List<AKB> getAKBbyPrice(BigDecimal start, BigDecimal end);
 
-    AkbResponse searchById(long Id);
+    AkbResponse searchById(long id);
 
     void delete(long id);
 
-    void edit(AkbRequest akb);
+    void edit(AkbRequest a);
 }

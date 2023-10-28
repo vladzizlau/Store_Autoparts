@@ -39,19 +39,18 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-ehcache</artifactId>
-            <version>5.6.15.Final</version>
+            <version>6.0.0.Alpha7</version>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>6.1.5.Final</version>
-            <type>pom</type>
+            <version>6.3.1.Final</version>
         </dependency>
+
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-hikaricp</artifactId>
-            <version>5.6.13.Final</version>
-            <type>pom</type>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>5.0.1</version>
         </dependency>
 
         <!-- Spring -->
@@ -78,13 +77,10 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>5.3.24</version>
+            <version>6.0.13</version>
         </dependency>
 
-
-
-
-<!--   Spring DATA     -->
+        <!--   Spring DATA     -->
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
@@ -108,8 +104,9 @@
             <artifactId>mapstruct-processor</artifactId>
             <version>1.5.5.Final</version>
         </dependency>
+
+
+
+
     </dependencies>
-
-
-
 </project>

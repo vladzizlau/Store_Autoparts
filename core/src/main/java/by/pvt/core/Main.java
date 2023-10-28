@@ -1,14 +1,9 @@
 package by.pvt.core;
 
-import by.pvt.core.config.HibernateConfig;
 import by.pvt.core.config.PropertiesConfig;
 import by.pvt.core.domain.shopDomain.*;
+import by.pvt.core.service.carService.*;
 import by.pvt.core.repository.*;
-import by.pvt.core.service.carService.AkbService;
-import by.pvt.core.service.shopService.UserService;
-import by.pvt.core.domain.User;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -79,10 +74,16 @@ public class Main {
 //        System.out.println(us.getAllUsers());
 
         ApplicationContext ac = new AnnotationConfigApplicationContext(PropertiesConfig.class);
-        AkbService us = ac.getBean(AkbService.class);
-        System.out.println(us.getAll());
+//        AkbService us = ac.getBean(AkbService.class);
+//        System.out.println(us.getAll());
+//        System.out.println(us.getAKBbyVoltage(12));
+//        System.out.println(us.getAKBbyPrice(new BigDecimal(100), new BigDecimal(999999)));
+//        System.out.println(us.searchById(1));
+//        System.out.println(us.getAKBbyBatteryCapacity(120.0));
 
 
+       TiresService ts = ac.getBean(TiresService.class);
+       ts.getTirebyWidth(250);
     }
 
 
@@ -97,24 +98,24 @@ public class Main {
 //                .height(150)
 //                .price(new BigDecimal(200))
 //                .build();
-        AKBRepository akbRepository = new AKBRepository();
-//        akbRepository.addAKB(akb);
-
-        System.out.println(akbRepository.getAKBbyPrice(new BigDecimal(100), new BigDecimal(500)));
+//        AKBRepository akbRepository = new AKBRepository();
+////        akbRepository.addAKB(akb);
+//
+//        System.out.println(akbRepository.getAKBbyPrice(new BigDecimal(100), new BigDecimal(500)));
     }
 
-    private static void addBodypart() {
-       BodyPart bodyPart = BodyPart.builder()
-               .name("Бампер")
-               .count(1)
-               .cost(new BigDecimal(100))
-               .build();
-
-       BodyPartRepository bodyPartRepository = new BodyPartRepository();
-//       bodyPartRepository.addBodyPart(bodyPart);
-        System.out.println(bodyPartRepository.getBodypartByModel(2L));
-
-    }
+//    private static void addBodypart() {
+//       BodyPart bodyPart = BodyPart.builder()
+//               .name("Бампер")
+//               .count(1)
+//               .cost(new BigDecimal(100))
+//               .build();
+//
+//       BodyPartRepository bodyPartRepository = new BodyPartRepository();
+////       bodyPartRepository.addBodyPart(bodyPart);
+//        System.out.println(bodyPartRepository.getBodypartByModel(2L));
+//
+//    }
 
     private static void addEngine() {
         Engine engine = Engine.builder()
@@ -125,23 +126,23 @@ public class Main {
                 .cost(new BigDecimal(580))
                 .build();
 
-        EngineRepository engineRepository = new EngineRepository();
-//        engineRepository.addEngine(engine);
-        System.err.println(engineRepository.getEngineByType(EngineType.DIESEL));
+//        EngineRepository engineRepository = new EngineRepository();
+////        engineRepository.addEngine(engine);
+//        System.err.println(engineRepository.getEngineByType(EngineType.DIESEL));
     }
 
     public static void addUSer() {
-        UserRepository ur = new UserRepository();
-        UserService userService = new UserService(ur);
-        User user1 = User.builder()
-                .id(1L)
-                .age(23)
-                .amountSum(500)
-                .firstName("Антон")
-                .surName("Коржиков")
-                .lastVisitDate(LocalDate.of(2019, Month.JUNE, 3))
-                .phoneNumber("+375175682345")
-                .build();
+//        UserRepository ur = new UserRepository();
+//        UserService userService = new UserService(ur);
+//        User user1 = User.builder()
+//                .id(1L)
+//                .age(23)
+//                .amountSum(500)
+//                .firstName("Антон")
+//                .surName("Коржиков")
+//                .lastVisitDate(LocalDate.of(2019, Month.JUNE, 3))
+//                .phoneNumber("+375175682345")
+//                .build();
 
 
 
@@ -216,11 +217,11 @@ public class Main {
     public static void addCar(){
 //        List <CarModel> brands = new List<CarModel>() {"Audi", "BMW", "Renault", "Citroen", "VW"};
 
-        CarRepository carRepository = new CarRepository();
-        Car car1 = Car.builder()
-                .brand("Audi")
-                .build();
-        carRepository.addCar(car1);
+//        CarRepository carRepository = new CarRepository();
+//        Car car1 = Car.builder()
+//                .brand("Audi")
+//                .build();
+//        carRepository.addCar(car1);
 
 //        CarModel carModel = CarModel.builder()
 //                .car(car1)
@@ -259,8 +260,8 @@ public class Main {
 //CarRepository carRepository = new CarRepository();
 //carRepository.getAllModel(1L);?
 
-        CarModelRepository carModelRepository = new CarModelRepository();
-        System.out.println(carModelRepository.getModelById(2L));
+//        CarModelRepository carModelRepository = new CarModelRepository();
+//        System.out.println(carModelRepository.getModelById(2L));
 
     }
 

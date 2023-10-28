@@ -2,15 +2,16 @@ package by.pvt.core.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -18,11 +19,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-//lesson 25
+
 @Configuration
 @EnableTransactionManagement
 @ComponentScan("by.pvt.core")
 @PropertySource("app.properties")
+@EnableJpaRepositories("by.pvt.core.repository")
 public class PropertiesConfig {
     @Value("${server.url}")
     private String url;
@@ -53,8 +55,7 @@ public class PropertiesConfig {
         hikariConfig.setJdbcUrl(url);
         hikariConfig.setUsername(username);
         hikariConfig.setPassword(pass);
-        HikariDataSource ds = new HikariDataSource(hikariConfig);
-        return ds;
+        return new HikariDataSource(hikariConfig);
     }
 
     @Bean
@@ -64,23 +65,39 @@ public class PropertiesConfig {
         properties.setProperty("hibernate.show_sql", show_sql);
         properties.setProperty("hibernate.format_sql", format_sql);
         properties.setProperty("hibernate.dialect", dialect);
-        properties.setProperty("hibernate.packagesToScan", packagesToScan);
         return properties;
     }
 
     @Bean
-    public SessionFactory sessionFactory() throws Exception{
-        LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
-        localSessionFactoryBean.setPackagesToScan(packagesToScan);
-        localSessionFactoryBean.setDataSource(dataSource());
-        localSessionFactoryBean.setHibernateProperties(hiberProperties());
-        localSessionFactoryBean.afterPropertiesSet();
-        return localSessionFactoryBean.getObject();
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+        LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+        localContainerEntityManagerFactoryBean.setDataSource(dataSource());
+        localContainerEntityManagerFactoryBean.setJpaProperties(hiberProperties());
+        localContainerEntityManagerFactoryBean.setPackagesToScan(packagesToScan);
+        localContainerEntityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+        return localContainerEntityManagerFactoryBean;
     }
 
     @Bean
-   public PlatformTransactionManager transactionManager(SessionFactory sessionFactory){
-        return new HibernateTransactionManager(sessionFactory);
+    public PlatformTransactionManager transactionManager() {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
+        return transactionManager;
     }
+
+//    @Bean
+//    public SessionFactory sessionFactory() throws Exception{
+//        LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
+//        localSessionFactoryBean.setPackagesToScan(packagesToScan);
+//        localSessionFactoryBean.setDataSource(dataSource());
+//        localSessionFactoryBean.setHibernateProperties(hiberProperties());
+//        localSessionFactoryBean.afterPropertiesSet();
+//        return localSessionFactoryBean.getObject();
+//    }
+
+//    @Bean
+//   public PlatformTransactionManager transactionManager(SessionFactory sessionFactory){
+//        return new HibernateTransactionManager(sessionFactory);
+//    }
 
 }

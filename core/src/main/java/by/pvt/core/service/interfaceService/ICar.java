@@ -23,7 +23,8 @@ public interface ICar {
 
     CarResponse carSearchById(Long Id);
 
-    CarModel modelSearchById(Long id);
+    CarModelResponse modelSearchById(Long id);
+
 
     List<CarModel> getModelByBrand(Long id);
 

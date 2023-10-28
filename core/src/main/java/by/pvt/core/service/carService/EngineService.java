@@ -2,55 +2,59 @@ package by.pvt.core.service.carService;
 
 import by.pvt.api.dto.carDTO.EngineRequest;
 import by.pvt.api.dto.carDTO.EngineResponse;
-import by.pvt.api.dto.carDTO.TireResponse;
-import by.pvt.core.convert.EngineConvert;
 import by.pvt.core.domain.shopDomain.Engine;
 import by.pvt.core.domain.shopDomain.EngineType;
-import by.pvt.core.domain.shopDomain.TireType;
 import by.pvt.core.mapper.EngineMapper;
-import by.pvt.core.repository.EngineRepository;
+import by.pvt.core.repository.EngineRepo;
 import by.pvt.core.service.interfaceService.IEngine;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class EngineService implements IEngine {
-    private final EngineRepository engineRepository;
+    @Autowired
+    private EngineRepo engineRepository;
+    @Autowired
     private EngineMapper engineMapper;
-
-
-    public EngineService(EngineRepository repository) {
-        engineRepository = repository;
-    }
 
     @Override
     public void add(EngineRequest engine) {
-        engineRepository.addEngine(engineMapper.toEntity(engine));
+        engineRepository.save(engineMapper.toEntity(engine));
     }
 
     @Override
     public List<EngineResponse> getAll() {
-        return engineRepository.getAllEngine();
+        return engineMapper.toResponseList(engineRepository.findAll());
     }
+
     @Override
-    public List<EngineResponse> getEngineByCapacity(Double capacity)
-    {return engineRepository.getEngineByCapacity(capacity); }
+    public List<EngineResponse> getEngineByCapacity(Double capacity) {
+        return engineRepository.getEngineByCapacity(capacity);
+    }
+
     @Override
-    public List<EngineResponse> getEngineByType(EngineType type)
-    {return engineRepository.getEngineByType(type);}
+    public List<EngineResponse> getEngineByType(EngineType type) {
+        return engineRepository.getEngineByType(type);
+    }
+
     @Override
-    public List<Engine> getEngineByPrice(BigDecimal start, BigDecimal end)
-    {return engineRepository.getEngineByPrice(start, end);}
+    public List<Engine> getEngineByPrice(BigDecimal start, BigDecimal end) {
+        return engineRepository.getEngineByPrice(start, end);
+    }
 
     @Override
     public EngineResponse searchById(long Id) {
-        return engineRepository.findById(Id);
+        Optional<Engine> byId = engineRepository.findById(Id);
+        return engineMapper.toResponse(byId.get());
     }
 
     @Override
     public void delete(long id) {
-        engineRepository.delEngine(id);
+        engineRepository.deleteById(id);
     }
 
     @Override
@@ -60,7 +64,7 @@ public class EngineService implements IEngine {
         engine.setEngineCapacity(e.getEngineCapacity());
         engine.setCount(e.getCount());
         engine.setCost(e.getCost());
-        engineRepository.updateEngine(engine);
+        engineRepository.save(engine);
     }
 
 
