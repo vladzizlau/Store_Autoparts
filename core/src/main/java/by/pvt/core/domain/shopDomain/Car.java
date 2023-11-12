@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Objects;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity

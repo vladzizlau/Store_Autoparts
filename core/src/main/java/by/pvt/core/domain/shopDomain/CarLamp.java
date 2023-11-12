@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Data
-@Builder
 @Entity
 @Table(schema = "parts", name = "carlamp")
 public class CarLamp {

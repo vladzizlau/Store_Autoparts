@@ -6,15 +6,12 @@ import by.pvt.core.domain.Shopcart;
 
 import java.util.List;
 
-public interface IShopCart
-    {
-    void add(ShopcartRequest shopcart);
+public interface IShopCart {
+    Long add(ShopcartRequest shopcart);
 
     List<ShopcartResponse> getAll();
 
-        ShopcartResponse searchById(long Id);
+    ShopcartResponse searchById(long Id);
 
     void delete(long id);
-
-    void edit(ShopcartRequest shopcart);
 }

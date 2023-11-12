@@ -8,11 +8,11 @@ import java.math.BigDecimal;
 @Data
 
 public class EngineRequest {
-    private long id;
+    private Long id;
     private String name;
     private String type;
-    private double engineCapacity;
-    private int count;
+    private Double engineCapacity;
+    private Integer count;
     private BigDecimal cost;
 
 

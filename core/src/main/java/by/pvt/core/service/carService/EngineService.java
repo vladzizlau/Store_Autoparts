@@ -15,57 +15,66 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EngineService implements IEngine {
-    @Autowired
+public class EngineService implements IEngine
+    {
     private EngineRepo engineRepository;
-    @Autowired
     private EngineMapper engineMapper;
 
+    @Autowired
+    public EngineService(EngineRepo engineRepository, EngineMapper engineMapper)
+        {
+        this.engineRepository = engineRepository;
+        this.engineMapper = engineMapper;
+        }
+
     @Override
-    public void add(EngineRequest engine) {
+    public void add(EngineRequest engine)
+        {
         engineRepository.save(engineMapper.toEntity(engine));
-    }
+        }
 
     @Override
-    public List<EngineResponse> getAll() {
+    public List<EngineResponse> getAll()
+        {
         return engineMapper.toResponseList(engineRepository.findAll());
-    }
+        }
 
     @Override
-    public List<EngineResponse> getEngineByCapacity(Double capacity) {
+    public List<EngineResponse> getEngineByCapacity(Double capacity)
+        {
         return engineRepository.getEngineByCapacity(capacity);
-    }
+        }
 
     @Override
-    public List<EngineResponse> getEngineByType(EngineType type) {
+    public List<EngineResponse> getEngineByType(EngineType type)
+        {
         return engineRepository.getEngineByType(type);
-    }
+        }
 
     @Override
-    public List<Engine> getEngineByPrice(BigDecimal start, BigDecimal end) {
+    public List<Engine> getEngineByPrice(BigDecimal start, BigDecimal end)
+        {
         return engineRepository.getEngineByPrice(start, end);
-    }
+        }
 
     @Override
-    public EngineResponse searchById(long Id) {
+    public EngineResponse searchById(long Id)
+        {
         Optional<Engine> byId = engineRepository.findById(Id);
         return engineMapper.toResponse(byId.get());
-    }
+        }
 
     @Override
-    public void delete(long id) {
+    public void delete(long id)
+        {
         engineRepository.deleteById(id);
-    }
+        }
 
     @Override
-    public void edit(EngineRequest e) {
-        Engine engine = engineMapper.toEntity(e);
-        engine.setType(EngineType.valueOf(e.getType()));
-        engine.setEngineCapacity(e.getEngineCapacity());
-        engine.setCount(e.getCount());
-        engine.setCost(e.getCost());
-        engineRepository.save(engine);
+    public void edit(EngineRequest e)
+        {
+        engineRepository.save(engineMapper.toEntity(e));
+        }
+
+
     }
-
-
-}

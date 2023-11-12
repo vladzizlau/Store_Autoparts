@@ -1,10 +1,7 @@
 package by.pvt.core.domain;
 
 import by.pvt.core.domain.shopDomain.Car;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
@@ -12,10 +9,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-@Data
-@Entity
-@Builder
+@Getter
+@Setter
 @Table(schema = "parts", name = "user")
+@Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

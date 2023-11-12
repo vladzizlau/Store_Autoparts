@@ -10,19 +10,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
 public class UserService implements IUser {
-@Autowired
     private UserRepo userRepository;
-@Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    public UserService(UserRepo userRepository, UserMapper userMapper) {
+        this.userRepository = userRepository;
+        this.userMapper = userMapper;
+    }
 
 
     @Override
-    public void addUser(UserRequest user) {
-        userRepository.save(userMapper.toEntity(user));
+    public User addUser(UserRequest userRequest) {
+        return userRepository.save(userMapper.toEntity(userRequest));
     }
 
     @Override
@@ -33,7 +38,21 @@ public class UserService implements IUser {
     @Override
     public UserResponse searchById(long userId) {
         Optional<User> byId = userRepository.findById(userId);
-    return userMapper.toResponse(byId.get());
+        return userMapper.toResponse(byId.get());
+    }
+    public User getUserById(long userId) {
+        Optional<User> byId = userRepository.findById(userId);
+        return byId.get();
+    }
+
+    private UserResponse searchByEmail(String email) {
+        List<UserResponse> urL = getAllUsers();
+        for (UserResponse userResponse : urL) {
+            if (userResponse.getEmail() == email) {
+                return userResponse;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -43,17 +62,22 @@ public class UserService implements IUser {
 
     @Override
     public void editUser(UserRequest updateUser) {
-        User user = userMapper.toEntity(updateUser);
-        user.setAge(updateUser.getAge());
-        user.setAmountSum(updateUser.getAmountSum());
-        user.setFirstName(updateUser.getFirstName());
-        user.setLastVisitDate(updateUser.getLastVisitDate());
-        user.setPhoneNumber(updateUser.getPhoneNumber());
-        user.setSurName(updateUser.getSurName());
-        userRepository.save(user);
+        userRepository.save(userMapper.toEntity(updateUser));
     }
 
 
+    @Override
+    public String validate(UserRequest request) {
+        UserResponse userResponse = searchByEmail(request.getEmail());
+        if (userResponse != null) {
+            if (Objects.equals(userResponse.getPassword(), request.getPassword())) {
+                return "Valid";
+            }
+        }
+        return "Error validation";
+    }
+
+
+
+
 }
-
-

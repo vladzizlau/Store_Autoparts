@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface IUser {
-    void addUser(UserRequest user);
+    User addUser(UserRequest user);
 
     List<UserResponse> getAllUsers();
 
@@ -17,4 +17,6 @@ public interface IUser {
     void delUser(long id);
 
     void editUser(UserRequest updateUser);
+
+    String validate(UserRequest request);
 }

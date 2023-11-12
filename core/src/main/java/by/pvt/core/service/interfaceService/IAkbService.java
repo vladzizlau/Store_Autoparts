@@ -8,6 +8,8 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface IAkbService {
+    void add(AkbRequest request);
+
     List<AkbResponse> getAll();
 
     List<AKB> getAKBbyVoltage(int volt);

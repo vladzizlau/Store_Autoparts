@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 
 public class CarModelRequest {
-    private long id;
+    private Long id;
     private String model;
-    private int year;
+    private Integer year;
 }

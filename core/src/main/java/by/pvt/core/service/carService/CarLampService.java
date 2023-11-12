@@ -10,50 +10,65 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CarLampService implements ICarLamp {
-
-    @Autowired
+public class CarLampService implements ICarLamp
+    {
     private CarLampRepo carLampRepository;
-    @Autowired
     private CarLampMapper carLampMapper;
 
+    @Autowired
+    public CarLampService(CarLampRepo carLampR, CarLampMapper carLampM)
+        {
+        this.carLampRepository = carLampR;
+        this.carLampMapper = carLampM;
+        }
+
     @Override
-    public void add(CarLampRequest lamp) {
+    public void add(CarLampRequest lamp)
+        {
         carLampRepository.save(carLampMapper.toEntity(lamp));
-    }
+        }
+
     @Override
-    public List<CarLampResponse> getAll() {
+    public List<CarLampResponse> getAll()
+        {
         return carLampMapper.toResponseList(carLampRepository.findAll());
-    }
+        }
+
     public List<CarLampResponse> getCarLampByPower(int power)
-    {return carLampRepository.getCarLampByPower(power); }
+        {
+        return carLampRepository.getCarLampByPower(power);
+        }
+
     public List<CarLampResponse> getCarLampBySocket(String socket)
-    {return carLampRepository.getCarLampBySocket(socket); }
+        {
+        return carLampRepository.getCarLampBySocket(socket);
+        }
+
     public List<CarLampResponse> getCarLampByPrice(BigDecimal start, BigDecimal end)
-    {return carLampRepository.getCarLampByPrice(start, end); }
+        {
+        return carLampRepository.getCarLampByPrice(start, end);
+        }
+
     @Override
-    public CarLampResponse searchById(long Id) {
+    public CarLampResponse searchById(long Id)
+        {
         Optional<CarLamp> byId = carLampRepository.findById(Id);
         return carLampMapper.toResponse(byId.get());
-    }
+        }
+
     @Override
-    public void delete(long id) {
+    public void delete(long id)
+        {
         carLampRepository.deleteById(id);
-    }
+        }
+
     @Override
-    public void edit(CarLampRequest lamp) {
-        CarLamp lamps = carLampMapper.toEntity(lamp);
-        lamps.setName(lamps.getName());
-        lamps.setModel(lamps.getModel());
-        lamps.setSocket(lamps.getSocket());
-        lamps.setPower(lamps.getPower());
-        lamps.setCount(lamps.getCount());
-        lamps.setCost(lamps.getCost());
-        carLampRepository.save(lamps);
+    public void edit(CarLampRequest lamp)
+        {
+        carLampRepository.save(carLampMapper.toEntity(lamp));
+        }
     }
-}

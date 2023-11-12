@@ -7,12 +7,12 @@ import java.math.BigDecimal;
 
 @Data
 public class TireRequest {
-    private long id;
+    private Long id;
     private String manufacturer;
     private String name;
-    private double profileWidth;
-    private double profileHeight;
-    private int diametr;
+    private Double profileWidth;
+    private Double profileHeight;
+    private Integer diametr;
     private String season;
     private BigDecimal price;
 

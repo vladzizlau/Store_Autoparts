@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @Builder
 public class CarModelResponse {
-    private long id;
+    private Long id;
     private String model;
-    private int year;
+    private Integer year;
 }

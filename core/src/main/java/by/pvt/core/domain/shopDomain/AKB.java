@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity

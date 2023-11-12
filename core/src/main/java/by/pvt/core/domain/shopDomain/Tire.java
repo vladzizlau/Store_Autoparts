@@ -8,7 +8,6 @@ import java.util.Objects;
 
 //Автошины
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity

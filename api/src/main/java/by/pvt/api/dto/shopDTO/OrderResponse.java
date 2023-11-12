@@ -4,13 +4,11 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
-@Builder
-public class OrderResponse {
-    private long id;
-    private long productId;
-    private long userId;
-    private double cost;
-    private int count;
 
+public class OrderResponse {
+    private Long id;
+    private Long userId;
+    private Double cost;
+    private String status;
 
 }

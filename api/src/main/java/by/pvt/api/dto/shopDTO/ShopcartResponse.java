@@ -9,10 +9,8 @@ import java.util.List;
 @Data
 @Builder
 public class ShopcartResponse {
-    private long id;
-    private Long orderId;
-    private String status;
+    private Long id;
     private BigDecimal cost;
-
-
+    private Integer count;
+    private Long product;
 }

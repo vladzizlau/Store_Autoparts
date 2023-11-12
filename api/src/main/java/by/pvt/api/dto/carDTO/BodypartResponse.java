@@ -8,9 +8,9 @@ import java.math.BigDecimal;
 @Data
 @Builder
 public class BodypartResponse {
-    private long id;
+    private Long id;
     private String name;
     private String carBrand;
-    private int count;
+    private Integer count;
     private BigDecimal cost;
 }

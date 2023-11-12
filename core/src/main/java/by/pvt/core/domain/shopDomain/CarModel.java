@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -17,7 +16,7 @@ public class CarModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String model;
-    private int year;
+    private Integer year;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude

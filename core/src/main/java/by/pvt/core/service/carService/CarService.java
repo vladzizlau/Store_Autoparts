@@ -17,71 +17,91 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CarService implements ICar {
-    @Autowired
+public class CarService implements ICar
+    {
     private CarRepo carRepository;
-    @Autowired
     private CarModelRepo modelRepository;
-    @Autowired
     private CarMapper carMapper;
 
+    @Autowired
+    public CarService(CarRepo carRepository, CarModelRepo modelRepository, CarMapper carMapper)
+        {
+        this.carRepository = carRepository;
+        this.modelRepository = modelRepository;
+        this.carMapper = carMapper;
+        }
+
+//    @Autowired
+//    public CarService(CarModelRepo modelRepository)
+//        {
+//        this.modelRepository = modelRepository;
+//        }
 
     @Override
-    public void addCar(CarRequest car) {
+    public void addCar(CarRequest car)
+        {
         carRepository.save(carMapper.carToEntity(car));
-    }
-    @Override
-    public void addModel(CarModelRequest model) {
-        modelRepository.save(carMapper.modelToEntity(model));
-    }
-    @Override
-    public List<CarResponse> getAllCar() {
-        return carMapper.carResponseList(carRepository.findAll());
-    }
-    @Override
-    public List<CarModelResponse> getAllModel(){
-        return carMapper.modelResponseList(modelRepository.findAll());
-    }
+        }
 
     @Override
-    public CarResponse carSearchById(Long Id) {
+    public void addModel(CarModelRequest model)
+        {
+        modelRepository.save(carMapper.modelToEntity(model));
+        }
+
+    @Override
+    public List<CarResponse> getAllCar()
+        {
+        return carMapper.carResponseList(carRepository.findAll());
+        }
+
+    @Override
+    public List<CarModelResponse> getAllModel()
+        {
+        return carMapper.modelResponseList(modelRepository.findAll());
+        }
+
+    @Override
+    public CarResponse carSearchById(Long Id)
+        {
         Optional<Car> byId = carRepository.findById(Id);
         return carMapper.carToResponse(byId.get());
-    }
-    @Override
-    public CarModelResponse modelSearchById(Long id){
-        Optional <CarModel> byId = modelRepository.findById(id);
-        return  carMapper.modelToResponse(byId.get());
-    }
-    @Override
-    public List<CarModel> getModelByBrand(Long id)
-    {
-        return modelRepository.getModelByBrand(id);
-    }
+        }
 
     @Override
-    public void carDelete(long id) {
+    public CarModelResponse modelSearchById(Long id)
+        {
+        Optional<CarModel> byId = modelRepository.findById(id);
+        return carMapper.modelToResponse(byId.get());
+        }
+
+    @Override
+    public List<CarModel> getModelByBrand(Long id)
+        {
+        return modelRepository.getModelByBrand(id);
+        }
+
+    @Override
+    public void carDelete(long id)
+        {
         carRepository.deleteById(id);
-    }
+        }
+
     @Override
-    public void modelDelete(long id){
+    public void modelDelete(long id)
+        {
         modelRepository.deleteById(id);
-    }
+        }
+
     @Override
-    public void carEdit(CarRequest c) {
-        Car car = carMapper.carToEntity(c);
-        car.setId(car.getId());
-        car.setBrand(car.getBrand());
-        carRepository.save(car);
-    }
+    public void carEdit(CarRequest c)
+        {
+        carRepository.save(carMapper.carToEntity(c));
+        }
 
     @Override
     public void modelEdit(CarModelRequest c)
-    {
-        CarModel model = carMapper.modelToEntity(c);
-        model.setId(c.getId());
-        model.setModel(c.getModel());
-        model.setYear(c.getYear());
-        modelRepository.save(model);
+        {
+        modelRepository.save(carMapper.modelToEntity(c));
+        }
     }
-}

@@ -7,18 +7,14 @@ import java.util.List;
 import java.util.Objects;
 
 @Data
-@Builder
 @Entity
 @Table(schema = "parts", name = "order")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private StatusOrder status;
     private Double cost;
-
-
-    @OneToMany(mappedBy = "order")
-    private List<Shopcart> shopcart;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude

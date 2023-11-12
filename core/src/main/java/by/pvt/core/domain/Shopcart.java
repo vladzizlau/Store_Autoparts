@@ -14,16 +14,16 @@ import java.util.Objects;
 
 //Корзина
 @Data
-@Builder
 @Entity
 @Table(schema = "parts", name = "shopcart")
 public class Shopcart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String status;
     private BigDecimal cost;
     private Integer count;
+    private Long product;
+
 
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -31,25 +31,6 @@ public class Shopcart {
     @JoinColumn(name = "order_id")
     private Order order;
 
-    @OneToOne (fetch = FetchType.LAZY)
-    @EqualsAndHashCode.Exclude
-    @JoinColumn(name = "akb_id")
-    private AKB akb;
-
-    @OneToOne (fetch = FetchType.LAZY)
-    @EqualsAndHashCode.Exclude
-    @JoinColumn(name = "bodypart_id")
-    private BodyPart bodyPart;
-
-    @OneToOne (fetch = FetchType.LAZY)
-    @EqualsAndHashCode.Exclude
-    @JoinColumn(name = "carLamp_id")
-    private CarLamp carLamp;
-
-    @OneToOne (fetch = FetchType.LAZY)
-    @EqualsAndHashCode.Exclude
-    @JoinColumn(name = "tire_id")
-    private Tire tire;
 
     @Override
     public boolean equals(Object o) {

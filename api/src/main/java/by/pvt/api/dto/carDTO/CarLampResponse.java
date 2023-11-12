@@ -8,12 +8,12 @@ import java.math.BigDecimal;
 @Data
 @Builder
 public class CarLampResponse {
-    private long id;
+    private Long id;
     private String name;
     private String model;
     private String socket;
     private Integer power;
-    private int count;
+    private Integer count;
     private BigDecimal cost;
 
 

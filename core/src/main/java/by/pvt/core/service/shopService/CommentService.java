@@ -13,41 +13,47 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CommentService implements IComment {
-    @Autowired
+public class CommentService implements IComment
+    {
     private CommentRepo commentRepository;
-    @Autowired
     private CommentMapper commentMapper;
+
+    @Autowired
+    public CommentService(CommentRepo commentRepository, CommentMapper commentMapper)
+        {
+        this.commentRepository = commentRepository;
+        this.commentMapper = commentMapper;
+        }
+
 
     @Override
     public void addcomment(CommentRequest comm)
-    {
+        {
         commentRepository.save(commentMapper.toEntity(comm));
-    }
+        }
 
     @Override
     public List<CommentResponse> getAllComment()
-    {
+        {
         return commentMapper.toResponseList(commentRepository.findAll());
-    }
+        }
 
     @Override
     public CommentResponse findById(Long commID)
-    {
+        {
         Optional<Comments> byId = commentRepository.findById(commID);
         return commentMapper.toResponse(byId.get());
-    }
+        }
 
     @Override
-    public void delComment(long id) {
+    public void delComment(long id)
+        {
         commentRepository.deleteById(id);
-    }
+        }
 
     @Override
-    public void editComment(CommentRequest req) {
-        Comments comment = commentMapper.toEntity(req);
-        comment.setDateComment(req.getDateComment());
-        comment.setText(req.getText());
-        commentRepository.save(comment);
+    public void editComment(CommentRequest req)
+        {
+        commentRepository.save(commentMapper.toEntity(req));
+        }
     }
-}

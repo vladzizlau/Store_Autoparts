@@ -7,13 +7,9 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Data
-
 public class ShopcartRequest {
-    private long id;
-    private Long orderId;
-    private String status;
     private BigDecimal cost;
     private Integer count;
-
-
+    private Long product;
+    private Long user;
 }

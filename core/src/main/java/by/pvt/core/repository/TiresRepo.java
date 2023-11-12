@@ -12,14 +12,14 @@ import java.util.List;
 
 public interface TiresRepo extends JpaRepository<Tire, Long>{
 
-@Query(value = "Select t from Tire t where t.diametr = :Diametr")
-    List<TireResponse> getTirebyDiametr(@Param("Diametr") int d);
-    @Query(value = "Select t from Tire t where t.profile_width = :W")
-    List<TireResponse> getTirebyWidth(@Param("W") int w);
-    @Query(value = "Select t from Tire t where t.profile_height = :H")
-    List<TireResponse> getTirebyHeight(@Param("H") int h);
-    @Query(value = "Select t from Tire t where t.season = :S")
-    List<TireResponse> getTirebySeason(@Param("S") TireType type);
+@Query(value = "Select t from Tire t where t.diametr = :diametr")
+    List<TireResponse> getTirebyDiametr(@Param("diametr") int d);
+    @Query(value = "Select t from Tire t where t.profile_width = :w")
+    List<TireResponse> getTirebyWidth(@Param("w") int w);
+    @Query(value = "Select t from Tire t where t.profile_height = :h")
+    List<TireResponse> getTirebyHeight(@Param("h") int h);
+    @Query(value = "Select t from Tire t where t.season = :s")
+    List<TireResponse> getTirebySeason(@Param("s") TireType type);
     @Query(value = "Select t from Tire t where t.price > :start and t.price < :end")
     List<TireResponse> getTireByPrice(@Param("start") BigDecimal start, @Param("end") BigDecimal end);
 }

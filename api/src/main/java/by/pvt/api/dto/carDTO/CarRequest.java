@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 
 public class CarRequest {
-    private long id;
+    private Long id;
     private String brand;
 }

@@ -8,7 +8,7 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class CarResponse {
-    private long id;
+    private Long id;
     private String brand;
 
 

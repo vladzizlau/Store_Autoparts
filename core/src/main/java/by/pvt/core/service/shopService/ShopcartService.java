@@ -2,7 +2,9 @@ package by.pvt.core.service.shopService;
 
 import by.pvt.api.dto.shopDTO.ShopcartRequest;
 import by.pvt.api.dto.shopDTO.ShopcartResponse;
+import by.pvt.core.domain.Order;
 import by.pvt.core.domain.Shopcart;
+import by.pvt.core.domain.StatusOrder;
 import by.pvt.core.mapper.ShopcartMapper;
 import by.pvt.core.repository.ShopcartRepo;
 import by.pvt.core.service.interfaceService.IShopCart;
@@ -14,19 +16,29 @@ import java.util.Optional;
 
 @Service
 public class ShopcartService implements IShopCart {
-    @Autowired
     private ShopcartRepo shopCartRepository;
-    @Autowired
     private ShopcartMapper shopcartMapper;
+    private OrderService orderService;
+
+
+    @Autowired
+    public ShopcartService(ShopcartRepo shopCartRepository, ShopcartMapper shopcartMapper, OrderService orderService) {
+        this.shopCartRepository = shopCartRepository;
+        this.shopcartMapper = shopcartMapper;
+        this.orderService = orderService;
+    }
+
 
     @Override
-    public void add(ShopcartRequest shopcart) {
-        shopCartRepository.save(shopcartMapper.toEntity(shopcart));
+    public Long add(ShopcartRequest request) {
+        Shopcart shopcart = shopcartMapper.toEntity(request);
+        shopcart.setOrder(orderService.getThisWorkingOrder(request.getUser()));
+        return shopCartRepository.save(shopcart).getId();
     }
 
     @Override
     public List<ShopcartResponse> getAll() {
-         return shopcartMapper.toResponseList(shopCartRepository.findAll());
+        return shopcartMapper.toResponseList(shopCartRepository.findAll());
     }
 
     @Override
@@ -40,12 +52,4 @@ public class ShopcartService implements IShopCart {
         shopCartRepository.deleteById(id);
     }
 
-    @Override
-    public void edit(ShopcartRequest shr) {
-        Shopcart shopcart = shopcartMapper.toEntity(shr);
-        shopcart.setCount(shr.getCount());
-        shopcart.setStatus(shr.getStatus());
-        shopcart.setCost(shr.getCost());
-        shopCartRepository.save(shopcart);
-    }
 }

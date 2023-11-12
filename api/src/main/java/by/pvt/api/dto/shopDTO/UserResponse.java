@@ -4,19 +4,20 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 
-import jakarta.persistence.Column;
+//import jakarta.persistence.Column;
 import java.time.LocalDate;
 @Data
 @Builder
 public class UserResponse {
 
-    private long id;
+    private Long id;
 
     private String firstName;
 
     private String surName;
 
     private Integer age;
+    private String password;
 
     private String phoneNumber;
 
@@ -24,5 +25,5 @@ public class UserResponse {
 
     private LocalDate lastVisitDate;
 
-    private double amountSum;
+    private Double amountSum;
 }

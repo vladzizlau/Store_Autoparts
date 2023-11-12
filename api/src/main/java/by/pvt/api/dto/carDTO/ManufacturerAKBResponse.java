@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class ManufacturerAKBResponse {
-    private long id;
+    private Long id;
     private String name;
 
 
