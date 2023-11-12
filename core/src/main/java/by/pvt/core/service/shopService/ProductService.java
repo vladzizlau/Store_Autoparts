@@ -2,15 +2,10 @@ package by.pvt.core.service.shopService;
 
 import by.pvt.core.service.carService.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ProductService {
@@ -39,18 +34,31 @@ public class ProductService {
         return Arrays.asList(akbService.getAll(), bodyPartService.getAll(), carLampService.getAll(), carService.getAllCar(), carService.getAllModel(), engineService.getAll(), manufacturerAKBService.getAll(), manufacturerTiresService.getAll(), tiresService.getAll());
     }
 
-//    public List<List<?>> allprodPages(){
-//        List<List<?>> list = getAllprod();
-//        List<List<?>> newlist = null;
-//        int count = list.size();
-//
-//        for(int i = 0; i < 10; i++)
-//        {
-//           newlist.add(list.get(i));
-//        }
+    public List<?> getCategoryProds(String category) {
+        return switch (category) {
+            case ("akb") -> akbService.getAll();
+            case ("bodypart") -> bodyPartService.getAll();
+            case ("carlamp") -> carLampService.getAll();
+            case ("engine") -> engineService.getAll();
+            case ("tire") -> tiresService.getAll();
+            default -> getAllprod();
+        };
+    }
+
+    public List<List<?>> allprodPages(int countpage, int size) {
+        List<List<?>> list = getAllprod();
+        List<List<?>> newlist = new ArrayList<List<?>>();
+
+        if (countpage * size < list.size()) {
+            for (int i = countpage * size - size; i < countpage * size; ) {
+                newlist.add(list.get(i));
+                i++;
+            }
+            return newlist;
+        }
+        return getAllprod();
+    }
 
 
-
-//    }
 
 }
