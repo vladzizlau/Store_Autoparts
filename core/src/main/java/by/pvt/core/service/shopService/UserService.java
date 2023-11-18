@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -43,20 +42,16 @@ public class UserService implements IUser {
     public UserResponse searchById(long userId) {
         return userMapper.toResponse(getUserById(userId));
     }
+
     @Override
     public User getUserById(long userId) {
         Optional<User> byId = userRepository.findById(userId);
         return byId.get();
     }
 
-    private UserResponse searchByEmail(String email) {
-        List<UserResponse> urL = getAllUsers();
-        for (UserResponse userResponse : urL) {
-            if (Objects.equals(userResponse.getEmail(), email)) {
-                return userResponse;
-            }
-        }
-        return null;
+    @Override
+    public UserResponse searchByEmail(String email) {
+        return userMapper.toResponse(userRepository.getUserByEmail(email));
     }
 
     @Override
@@ -68,20 +63,6 @@ public class UserService implements IUser {
     public void editUser(UserRequest updateUser) {
         userRepository.save(userMapper.toEntity(updateUser));
     }
-
-
-    @Override
-    public String validate(UserRequest request) {
-        UserResponse userResponse = searchByEmail(request.getEmail());
-        if (userResponse != null) {
-            if (Objects.equals(userResponse.getPassword(), request.getPassword())) {
-                return "Valid";
-            }
-        }
-        return "Error validation";
-    }
-
-
 
 
 }

@@ -63,8 +63,8 @@ public class CartController {
 
     @PostMapping("/editorder")
     public String editOrder (@Validated @RequestBody OrderRequest request){
-        orderService.edit(request);
-        return "Order change: " +request.getId();
+        Long id = orderService.edit(request);
+        return "Order change: " + id;
     }
 
     @PostMapping("/delorder={id}")

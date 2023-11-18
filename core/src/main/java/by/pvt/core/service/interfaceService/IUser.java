@@ -16,9 +16,10 @@ public interface IUser {
 
     User getUserById(long userId);
 
+    UserResponse searchByEmail(String email);
+
     void delUser(long id);
 
     void editUser(UserRequest updateUser);
 
-    String validate(UserRequest request);
 }

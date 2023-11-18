@@ -13,6 +13,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,12 +36,18 @@ public class OrderService implements IOrder {
     }
 
     @Override
+    @Transactional
     public OrderResponse add(long userId) {
         User user = userService.getUserById(userId);
-        Order order = new Order();
-        order.setStatus(StatusOrder.НЕ_ВЫПОЛНЕН);
-        order.setUser(user);
-        return orderMapper.toResponse(orderRepository.save(order));
+        if(user != null) {
+            Order order = new Order();
+            order.setStatus(StatusOrder.НЕ_ВЫПОЛНЕН);
+            order.setUser(user);
+            return orderMapper.toResponse(orderRepository.save(order));
+        }
+        else {
+            throw new RuntimeException();
+        }
     }
 
     @Override
@@ -60,6 +67,7 @@ public class OrderService implements IOrder {
     }
 
     @Override
+    @Transactional
     public Long edit(OrderRequest ord) {
        return orderRepository.save(orderMapper.toEntity(ord)).getId();
     }
