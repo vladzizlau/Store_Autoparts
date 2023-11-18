@@ -35,11 +35,7 @@ public class UserController {
     public void deluser(@PathVariable("id") Long id){
         userService.delUser(id);
     }
-    @PostMapping("/reg")
-    public UserResponse addUser(@RequestBody UserRequest request)
-    {
-        return userService.addUser(request);
-    }
+
 
 
 }

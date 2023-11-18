@@ -5,10 +5,8 @@ import by.pvt.api.dto.carDTO.TireResponse;
 import by.pvt.core.service.carService.TiresService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,7 +21,7 @@ public class TireController {
     }
 
     @PostMapping("/add")
-    public TireResponse add(TireRequest request) {
+    public TireResponse add(@Validated @RequestBody TireRequest request) {
         return tiresService.add(request);
     }
 
@@ -33,7 +31,7 @@ public class TireController {
     }
 
     @PostMapping("/edit")
-    public TireResponse edit(TireRequest Request){
+    public TireResponse edit( @Validated @RequestBody TireRequest Request){
         return tiresService.edit(Request);
     }
 

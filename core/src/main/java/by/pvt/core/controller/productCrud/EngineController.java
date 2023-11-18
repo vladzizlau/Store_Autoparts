@@ -5,10 +5,8 @@ import by.pvt.api.dto.carDTO.EngineResponse;
 import by.pvt.core.service.carService.EngineService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,7 +22,7 @@ public class EngineController {
     }
 
     @PostMapping("/add")
-    public EngineResponse add(EngineRequest request) {
+    public EngineResponse add(@Validated @RequestBody EngineRequest request) {
         return engineService.add(request);
     }
 
@@ -34,7 +32,7 @@ public class EngineController {
     }
 
     @PostMapping("/edit")
-    public EngineResponse edit(EngineRequest Request){
+    public EngineResponse edit( @Validated @RequestBody EngineRequest Request){
         return engineService.edit(Request);
     }
 

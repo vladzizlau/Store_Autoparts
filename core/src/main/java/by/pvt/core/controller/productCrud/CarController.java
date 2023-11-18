@@ -9,10 +9,8 @@ import by.pvt.core.domain.shopDomain.CarModel;
 import by.pvt.core.service.carService.CarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,45 +27,51 @@ public class CarController {
     }
 
     @PostMapping("/addcar")
-    public CarResponse addcar(CarRequest request) {
+    public CarResponse addcar(@Validated
+                              @RequestBody
+                              CarRequest request) {
         return carService.addCar(request);
     }
+
     @PostMapping("/addmodel")
-    public CarModelResponse addmodel(CarModelRequest request) {
+    public CarModelResponse addmodel(@Validated @RequestBody CarModelRequest request) {
         return carService.addModel(request);
     }
 
     @GetMapping("/getallcars")
-    public List<CarResponse> getcars(){
+    public List<CarResponse> getcars() {
         return carService.getAllCar();
     }
+
     @GetMapping("/getallmodels")
-    public List<CarModelResponse> getmodels(){
+    public List<CarModelResponse> getmodels() {
         return carService.getAllModel();
     }
 
     @PostMapping("/editcar")
-    public CarResponse editcar(CarRequest Request){
+    public CarResponse editcar(@Validated @RequestBody CarRequest Request) {
         return carService.carEdit(Request);
     }
+
     @PostMapping("/editmodel")
-    public CarModelResponse editmodel(CarModelRequest Request){
+    public CarModelResponse editmodel(@Validated @RequestBody CarModelRequest Request) {
         return carService.modelEdit(Request);
     }
 
     @PostMapping("/delcar")
-    public String delсфк(Long id){
+    public String delсфк(Long id) {
         carService.carDelete(id);
         return id + " delete";
     }
+
     @PostMapping("/delmodel")
-    public String delьщвуд(Long id){
+    public String delьщвуд(Long id) {
         carService.modelDelete(id);
         return id + " delete";
     }
 
     @GetMapping
-    public List<CarModelResponse> getallByCar(Long id){
+    public List<CarModelResponse> getallByCar(Long id) {
         return carService.getModelByBrand(id);
     }
 }

@@ -6,10 +6,8 @@ import by.pvt.core.service.carService.ManufacturerAKBService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,7 +24,7 @@ public class ManufacturerAkbController {
     }
 
     @PostMapping("/add")
-    public ManufacturerAKBResponse add(ManufacturerAKBRequest request) {
+    public ManufacturerAKBResponse add(@Validated @RequestBody ManufacturerAKBRequest request) {
         return manufacturerAKBService.add(request);
     }
 

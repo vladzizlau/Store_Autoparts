@@ -5,10 +5,8 @@ import by.pvt.api.dto.carDTO.AkbResponse;
 import by.pvt.core.service.carService.AkbService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,7 +23,7 @@ public class AkbController {
     }
 
     @PostMapping("/add")
-    public AkbResponse add(AkbRequest request) {
+    public AkbResponse add(@Validated @RequestBody AkbRequest request) {
         return akbService.add(request);
     }
 
@@ -35,7 +33,7 @@ public class AkbController {
     }
 
     @PostMapping("/edit")
-    public AkbResponse edit(AkbRequest akbRequest){
+    public AkbResponse edit(@Validated @RequestBody AkbRequest akbRequest){
         return akbService.edit(akbRequest);
     }
 

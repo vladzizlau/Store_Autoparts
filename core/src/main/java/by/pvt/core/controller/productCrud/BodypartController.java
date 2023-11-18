@@ -6,10 +6,8 @@ import by.pvt.api.dto.carDTO.BodypartResponse;
 import by.pvt.core.service.carService.BodyPartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,7 +24,7 @@ public class BodypartController {
     }
 
     @PostMapping("/add")
-    public BodypartResponse add(BodypartRequest request) {
+    public BodypartResponse add(@Validated @RequestBody BodypartRequest request) {
         return bodyPartService.add(request);
     }
 
@@ -36,7 +34,7 @@ public class BodypartController {
     }
 
     @PostMapping("/edit")
-    public BodypartResponse edit(BodypartRequest Request){
+    public BodypartResponse edit( @Validated @RequestBody BodypartRequest Request){
         return bodyPartService.edit(Request);
     }
 

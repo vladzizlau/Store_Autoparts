@@ -6,10 +6,8 @@ import by.pvt.api.dto.carDTO.ManufacturerTireResponse;
 import by.pvt.core.service.carService.ManufacturerTiresService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,7 +22,7 @@ public class ManufacturerTiresContorller {
     }
 
     @PostMapping("/add")
-    public ManufacturerTireResponse add(ManufacturerTireRequest request) {
+    public ManufacturerTireResponse add(@Validated @RequestBody ManufacturerTireRequest request) {
         return manufacturerTiresService.add(request);
     }
 

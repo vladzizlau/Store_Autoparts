@@ -5,10 +5,8 @@ import by.pvt.api.dto.carDTO.CarLampResponse;
 import by.pvt.core.service.carService.CarLampService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,7 +22,7 @@ public class CarlampController {
     }
 
     @PostMapping("/add")
-    public CarLampResponse add(CarLampRequest request) {
+    public CarLampResponse add(@Validated @RequestBody CarLampRequest request) {
         return carLampService.add(request);
     }
 
@@ -34,7 +32,7 @@ public class CarlampController {
     }
 
     @PostMapping("/edit")
-    public CarLampResponse edit(CarLampRequest Request){
+    public CarLampResponse edit( @Validated @RequestBody CarLampRequest Request){
         return carLampService.edit(Request);
     }
 
