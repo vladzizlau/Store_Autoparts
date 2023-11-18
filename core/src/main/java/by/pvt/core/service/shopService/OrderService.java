@@ -9,10 +9,13 @@ import by.pvt.core.mapper.OrderMapper;
 import by.pvt.core.mapper.UserMapper;
 import by.pvt.core.repository.OrderRepo;
 import by.pvt.core.service.interfaceService.IOrder;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -21,6 +24,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
+@EnableTransactionManagement(proxyTargetClass = true)
 public class OrderService implements IOrder {
     private OrderRepo orderRepository;
     private OrderMapper orderMapper;

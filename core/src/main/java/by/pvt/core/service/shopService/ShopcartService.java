@@ -8,14 +8,18 @@ import by.pvt.core.domain.StatusOrder;
 import by.pvt.core.mapper.ShopcartMapper;
 import by.pvt.core.repository.ShopcartRepo;
 import by.pvt.core.service.interfaceService.IShopCart;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
+@EnableTransactionManagement(proxyTargetClass = true)
 public class ShopcartService implements IShopCart {
     private ShopcartRepo shopCartRepository;
     private ShopcartMapper shopcartMapper;

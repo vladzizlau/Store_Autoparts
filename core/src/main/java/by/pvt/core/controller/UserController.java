@@ -40,12 +40,6 @@ public class UserController {
     {
         return userService.addUser(request);
     }
-        @PostMapping("/login")
-    public String userLogin(@RequestBody UserRequest userRequest) {
-        return userService.validate(userRequest);
-    }
-
-
 
 
 }
