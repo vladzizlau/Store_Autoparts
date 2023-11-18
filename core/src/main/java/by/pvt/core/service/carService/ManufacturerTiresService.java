@@ -24,9 +24,9 @@ public class ManufacturerTiresService implements ImanufacturerTires
         }
 
     @Override
-    public void add(ManufacturerTireRequest mtires)
+    public ManufacturerTireResponse add(ManufacturerTireRequest mtires)
         {
-        manufacturerTiresRepo.save(tiresMapper.toEntity(mtires));
+        return tiresMapper.toResponse(manufacturerTiresRepo.save(tiresMapper.toEntity(mtires)));
         }
 
     @Override

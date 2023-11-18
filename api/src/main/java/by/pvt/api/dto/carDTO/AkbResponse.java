@@ -4,7 +4,7 @@ package by.pvt.api.dto.carDTO;
 import lombok.Builder;
 import lombok.Data;
 
-import jakarta.persistence.Entity;
+//import jakarta.persistence.Entity;
 import java.math.BigDecimal;
 
 
@@ -12,15 +12,16 @@ import java.math.BigDecimal;
 @Builder
 
 public class AkbResponse {
-    private long id;
+    private Long id;
+    private Long code;
     private String manufacturer;
     private String name;
-    private  int voltage;
-    private double batteryCapacity;
-    private int electricCurrent;
-    private int length;
-    private int width;
-    private int height;
+    private Integer voltage;
+    private Double batteryCapacity;
+    private Integer electricCurrent;
+    private Integer length;
+    private Integer width;
+    private Integer height;
     private BigDecimal price;
 
 }

@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 @Builder
 public class CarLampResponse {
     private Long id;
+    private Long code;
     private String name;
     private String model;
     private String socket;

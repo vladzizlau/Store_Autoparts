@@ -23,7 +23,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan("by.pvt.core")
-@PropertySource("app.properties")
+@PropertySource("classpath:app.properties")
 @EnableJpaRepositories("by.pvt.core.repository")
 public class PropertiesConfig {
     @Value("${server.url}")
@@ -34,7 +34,6 @@ public class PropertiesConfig {
     private String username;
     @Value("${server.password}")
     private String pass;
-
     @Value("${hibernate.hbm2ddl.auto}")
     private String h_Auto;
     @Value("${hibernate.show_sql}")
@@ -85,19 +84,6 @@ public class PropertiesConfig {
         return transactionManager;
     }
 
-//    @Bean
-//    public SessionFactory sessionFactory() throws Exception{
-//        LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
-//        localSessionFactoryBean.setPackagesToScan(packagesToScan);
-//        localSessionFactoryBean.setDataSource(dataSource());
-//        localSessionFactoryBean.setHibernateProperties(hiberProperties());
-//        localSessionFactoryBean.afterPropertiesSet();
-//        return localSessionFactoryBean.getObject();
-//    }
 
-//    @Bean
-//   public PlatformTransactionManager transactionManager(SessionFactory sessionFactory){
-//        return new HibernateTransactionManager(sessionFactory);
-//    }
 
 }

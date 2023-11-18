@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 @Builder
 public class TireResponse {
     private Long id;
+    private Long code;
     private String manufacturer;
     private String name;
     private Double profileWidth;

@@ -7,7 +7,7 @@ import by.pvt.core.domain.shopDomain.CarLamp;
 import java.util.List;
 
 public interface ICarLamp {
-    void add(CarLampRequest lamp);
+    CarLampResponse add(CarLampRequest lamp);
 
     List<CarLampResponse> getAll();
 
@@ -15,5 +15,7 @@ public interface ICarLamp {
 
     void delete(long id);
 
-    void edit(CarLampRequest lamps);
+    CarLampResponse edit(CarLampRequest lamps);
+
+    List<CarLampResponse> getByCode(Long code);
 }

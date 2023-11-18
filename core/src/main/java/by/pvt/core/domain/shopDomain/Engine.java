@@ -4,10 +4,10 @@ import lombok.*;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Objects;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -16,11 +16,17 @@ public class Engine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long code;
     private String name;
     private EngineType type; //бензин или дизель
     private Double engineCapacity;
     private Integer count;
     private BigDecimal cost;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    @JoinColumn(name = "model_id")
+    private CarModel carModel;
 
     @Override
     public boolean equals(Object o) {
@@ -30,8 +36,4 @@ public class Engine {
         return Objects.equals(id, engine.id);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

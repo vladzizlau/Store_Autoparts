@@ -17,10 +17,8 @@ public class Order {
     private Double cost;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @EqualsAndHashCode.Exclude
     @JoinColumn(name = "user_id")
     private User user;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -29,8 +27,5 @@ public class Order {
         return Objects.equals(id, order.id);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+
 }

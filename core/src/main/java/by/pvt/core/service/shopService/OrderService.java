@@ -27,9 +27,11 @@ public class OrderService implements IOrder {
     private UserMapper userMapper;
 
     @Autowired
-    public OrderService(OrderRepo orderRepository, OrderMapper orderMapper, UserService userService) {
+    public OrderService(OrderRepo orderRepository, OrderMapper orderMapper, UserService userService, UserMapper userMapper) {
         this.orderRepository = orderRepository;
         this.orderMapper = orderMapper;
+        this.userService = userService;
+        this.userMapper = userMapper;
     }
 
     @Override
@@ -58,48 +60,35 @@ public class OrderService implements IOrder {
     }
 
     @Override
-    public void edit(OrderRequest ord) {
-        orderRepository.save(orderMapper.toEntity(ord));
+    public Long edit(OrderRequest ord) {
+       return orderRepository.save(orderMapper.toEntity(ord)).getId();
     }
 
 
     // Ищем все ордеры пользователя
     @Override
     public List<OrderResponse> getOrderByUserId(Long id) {
-        List<OrderResponse> orl = new ArrayList<>();
-        for (OrderResponse or : getAll()) {
-            if (Objects.equals(or.getUserId(), id)) {
-                orl.add(or);
-            }
-        }
-        return orl;
+        return orderMapper.toResponseList(orderRepository.getAllByUser(id));
     }
 
     // Ищем ордеры пользователя по статусу
     @Override
     public List<OrderResponse> getUserOrderByStatus(Long userid, StatusOrder so) {
-        List<OrderResponse> orl = new ArrayList<>();
-        for (OrderResponse or : getOrderByUserId(userid)) {
-            if (Objects.equals(or.getStatus(), so.name())) {
-                orl.add(or);
-            }
-        }
-        return orl;
+        return orderMapper.toResponseList(orderRepository.getOrderUserByStatus(userid, so));
     }
 
-    private Order findOrder(Long id)
-    {
+    private Order findOrder(Long id) {
         return orderRepository.findById(id).get();
     }
+
     //Ищем один единственный ордер со статусом "Не выполнен" и если нет, то создаем новый
     public Order getThisWorkingOrder(Long userid) {
         List<OrderResponse> list = getUserOrderByStatus(userid, StatusOrder.НЕ_ВЫПОЛНЕН);
-            if(!list.isEmpty()) {
-                return findOrder(list.get(0).getId());
-            }
+        if (!list.isEmpty()) {
+            return findOrder(list.get(0).getId());
+        }
         return findOrder(add(userid).getId());
     }
-
 
 
 }

@@ -1,13 +1,14 @@
 package by.pvt.core.domain.shopDomain;
 
+import by.pvt.core.domain.Order;
 import lombok.*;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Objects;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -16,6 +17,7 @@ public class BodyPart {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long code;
     private String name;
     private Integer count;
     private BigDecimal cost;
@@ -33,8 +35,4 @@ public class BodyPart {
         return Objects.equals(id, bodyPart.id);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface ITires {
-    void add(TireRequest tires);
+    TireResponse add(TireRequest tires);
 
     List<TireResponse> getAll();
 
@@ -17,7 +17,7 @@ public interface ITires {
 
     void delete(long id);
 
-    void edit(TireRequest tires);
+    TireResponse edit(TireRequest tires);
 
     List<TireResponse> getTirebyDiametr(int d);
 
@@ -28,4 +28,6 @@ public interface ITires {
     List<TireResponse> getTirebySeason(TireType type);
 
     List<TireResponse> getTirebyPrice(BigDecimal start, BigDecimal end);
+
+    List<TireResponse> getByCode(Long code);
 }

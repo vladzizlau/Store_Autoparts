@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface CarModelRepo extends JpaRepository<CarModel, Long> {
 
-    @Query(value = "select m from CarModel m where m.car = :id")
+    @Query(value = "select m from CarModel m where m.car.id = :id")
     List<CarModel> getModelByBrand(@Param("id") Long id);
 }

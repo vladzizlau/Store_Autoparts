@@ -31,22 +31,17 @@ public class CarService implements ICar
         this.carMapper = carMapper;
         }
 
-//    @Autowired
-//    public CarService(CarModelRepo modelRepository)
-//        {
-//        this.modelRepository = modelRepository;
-//        }
 
     @Override
-    public void addCar(CarRequest car)
+    public CarResponse addCar(CarRequest car)
         {
-        carRepository.save(carMapper.carToEntity(car));
+        return carMapper.carToResponse(carRepository.save(carMapper.carToEntity(car)));
         }
 
     @Override
-    public void addModel(CarModelRequest model)
+    public CarModelResponse addModel(CarModelRequest model)
         {
-        modelRepository.save(carMapper.modelToEntity(model));
+        return carMapper.modelToResponse(modelRepository.save(carMapper.modelToEntity(model)));
         }
 
     @Override
@@ -76,9 +71,9 @@ public class CarService implements ICar
         }
 
     @Override
-    public List<CarModel> getModelByBrand(Long id)
+    public List<CarModelResponse> getModelByBrand(Long id)
         {
-        return modelRepository.getModelByBrand(id);
+        return carMapper.modelResponseList(modelRepository.getModelByBrand(id));
         }
 
     @Override
@@ -94,14 +89,14 @@ public class CarService implements ICar
         }
 
     @Override
-    public void carEdit(CarRequest c)
+    public CarResponse carEdit(CarRequest c)
         {
-        carRepository.save(carMapper.carToEntity(c));
+         return carMapper.carToResponse(carRepository.save(carMapper.carToEntity(c)));
         }
 
     @Override
-    public void modelEdit(CarModelRequest c)
+    public CarModelResponse modelEdit(CarModelRequest c)
         {
-        modelRepository.save(carMapper.modelToEntity(c));
+         return carMapper.modelToResponse(modelRepository.save(carMapper.modelToEntity(c)));
         }
     }

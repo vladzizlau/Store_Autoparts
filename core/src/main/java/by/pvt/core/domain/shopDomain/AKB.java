@@ -16,6 +16,7 @@ public class AKB {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long code;
     private String name;
     private Integer voltage; //12v или 24v
     private Double batteryCapacity; // емкость
@@ -40,8 +41,4 @@ public class AKB {
         return Objects.equals(id, akb.id);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

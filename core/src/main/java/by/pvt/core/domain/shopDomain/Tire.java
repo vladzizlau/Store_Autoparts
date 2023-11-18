@@ -16,6 +16,7 @@ public class Tire {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long code;
     private String name;
     private Double profile_width;
     private Double profile_height;
@@ -36,8 +37,5 @@ public class Tire {
         return Objects.equals(id, tire.id);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+
 }

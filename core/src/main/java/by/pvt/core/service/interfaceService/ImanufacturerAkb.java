@@ -7,12 +7,11 @@ import by.pvt.core.domain.shopDomain.ManufacturerAKB;
 
 import java.util.List;
 
-public interface ImanufacturerAkb
-    {
-    void add(ManufacturerAKBRequest makb);
+public interface ImanufacturerAkb {
+    ManufacturerAKBResponse add(ManufacturerAKBRequest makb);
 
     List<ManufacturerAKBResponse> getAll();
 
     void delete(long id);
 
-    }
+}

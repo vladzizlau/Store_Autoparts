@@ -4,11 +4,14 @@ import by.pvt.api.dto.shopDTO.OrderRequest;
 import by.pvt.api.dto.shopDTO.OrderResponse;
 import by.pvt.api.dto.shopDTO.ShopcartRequest;
 import by.pvt.api.dto.shopDTO.ShopcartResponse;
+import by.pvt.core.domain.StatusOrder;
 import by.pvt.core.service.carService.CarService;
 import by.pvt.core.service.shopService.OrderService;
 import by.pvt.core.service.shopService.ShopcartService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,8 +31,8 @@ public class CartController {
     }
 
     @PostMapping("/add")
-    public void add(@RequestBody ShopcartRequest request) {
-        shopService.add(request);
+    public Long add(@Validated @RequestBody ShopcartRequest request) {
+        return shopService.add(request);
     }
 
     @PostMapping("/get")
@@ -53,9 +56,13 @@ public class CartController {
     public List <OrderResponse> userOrder(@PathVariable("id") Long id){
         return orderService.getOrderByUserId(id);
     }
+    @PostMapping("/getbySatusAndid={id}&status={stat}")
+    public List <OrderResponse> userOrderbyStatus(@PathVariable("id") Long id, @PathVariable("stat") String status){
+        return orderService.getUserOrderByStatus(id, StatusOrder.valueOf(status));
+    }
 
     @PostMapping("/editorder")
-    public String editOrder (@RequestBody OrderRequest request){
+    public String editOrder (@Validated @RequestBody OrderRequest request){
         orderService.edit(request);
         return "Order change: " +request.getId();
     }

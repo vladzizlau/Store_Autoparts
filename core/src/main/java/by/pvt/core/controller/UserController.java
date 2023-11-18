@@ -14,11 +14,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/u")
 @RequiredArgsConstructor
-public class UserRestController {
+public class UserController {
 
     private UserService userService;
     @Autowired
-    public UserRestController(UserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
     @GetMapping("/getall")
@@ -36,10 +36,9 @@ public class UserRestController {
         userService.delUser(id);
     }
     @PostMapping("/reg")
-    public String addUser(@RequestBody UserRequest request)
+    public UserResponse addUser(@RequestBody UserRequest request)
     {
-        userService.addUser(request);
-        return "Register OK";
+        return userService.addUser(request);
     }
         @PostMapping("/login")
     public String userLogin(@RequestBody UserRequest userRequest) {

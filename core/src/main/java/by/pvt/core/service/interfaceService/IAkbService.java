@@ -8,11 +8,13 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface IAkbService {
-    void add(AkbRequest request);
+    AkbResponse add(AkbRequest request);
 
     List<AkbResponse> getAll();
 
     List<AKB> getAKBbyVoltage(int volt);
+
+    List<AkbResponse> getAKBbyBatteryCapacity(Double capacity);
 
     List<AKB> getAKBbyPrice(BigDecimal start, BigDecimal end);
 
@@ -20,5 +22,7 @@ public interface IAkbService {
 
     void delete(long id);
 
-    void edit(AkbRequest a);
+    AkbResponse edit(AkbRequest a);
+
+    List<AkbResponse> getByCode(Long code);
 }

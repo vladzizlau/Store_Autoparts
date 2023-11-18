@@ -16,7 +16,13 @@ public interface EngineRepo extends JpaRepository<Engine, Long> {
     List<Engine> getEngineByPrice(@Param("start") BigDecimal start, @Param("end") BigDecimal end);
 
     @Query(value = "select e from Engine e where e.engineCapacity = :capacity")
-    List<EngineResponse> getEngineByCapacity(@Param("capacity") Double capacity);
+    List<Engine> getEngineByCapacity(@Param("capacity") Double capacity);
     @Query(value = "select e from Engine e where e.type = :type")
-    List<EngineResponse> getEngineByType(@Param("type") EngineType type);
+    List<Engine> getEngineByType(@Param("type") EngineType type);
+
+    @Query(value = "select e from Engine e where e.carModel.id = :id")
+    List<Engine> getEngineByCarModel(@Param("id") Long id);
+
+    @Query(value = "select e from Engine e where e.code = :code")
+    List<Engine> getTireByCode(@Param("code")Long code);
 }

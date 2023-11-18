@@ -5,13 +5,12 @@ import by.pvt.api.dto.carDTO.ManufacturerTireResponse;
 
 import java.util.List;
 
-public interface ImanufacturerTires
-    {
-    void add(ManufacturerTireRequest mtires);
+public interface ImanufacturerTires {
+    ManufacturerTireResponse add(ManufacturerTireRequest mtires);
 
     List<ManufacturerTireResponse> getAll();
 
     void delete(long id);
 
 
-    }
+}

@@ -1,6 +1,7 @@
 package by.pvt.core.domain;
 
 import by.pvt.core.domain.shopDomain.Car;
+import by.pvt.core.domain.shopDomain.CarModel;
 import lombok.*;
 
 import jakarta.persistence.*;
@@ -9,8 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-@Getter
-@Setter
+@Data
 @Table(schema = "parts", name = "user")
 @Entity
 public class User {
@@ -24,6 +24,8 @@ public class User {
     private String phoneNumber;
     private String email;
     private LocalDate lastVisitDate;
+    private String role;
+
 
     @Column (name = "amount_sum")
     private double amountSum;
@@ -34,6 +36,13 @@ public class User {
     @OneToMany (mappedBy = "user")
     private List<Comments> comments;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    @JoinColumn(name = "model_car")
+    private CarModel carModel;
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -42,8 +51,4 @@ public class User {
         return Objects.equals(id, user.id);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

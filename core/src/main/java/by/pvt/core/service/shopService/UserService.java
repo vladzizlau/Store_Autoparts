@@ -9,6 +9,7 @@ import by.pvt.core.service.interfaceService.IUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -26,8 +27,11 @@ public class UserService implements IUser {
 
 
     @Override
-    public User addUser(UserRequest userRequest) {
-        return userRepository.save(userMapper.toEntity(userRequest));
+    public UserResponse addUser(UserRequest userRequest) {
+        User user = userMapper.toEntity(userRequest);
+        user.setRole("Client");
+        user.setLastVisitDate(LocalDate.now());
+        return userMapper.toResponse(userRepository.save(user));
     }
 
     @Override
@@ -37,9 +41,9 @@ public class UserService implements IUser {
 
     @Override
     public UserResponse searchById(long userId) {
-        Optional<User> byId = userRepository.findById(userId);
-        return userMapper.toResponse(byId.get());
+        return userMapper.toResponse(getUserById(userId));
     }
+    @Override
     public User getUserById(long userId) {
         Optional<User> byId = userRepository.findById(userId);
         return byId.get();
@@ -48,7 +52,7 @@ public class UserService implements IUser {
     private UserResponse searchByEmail(String email) {
         List<UserResponse> urL = getAllUsers();
         for (UserResponse userResponse : urL) {
-            if (userResponse.getEmail() == email) {
+            if (Objects.equals(userResponse.getEmail(), email)) {
                 return userResponse;
             }
         }

@@ -24,9 +24,9 @@ public class ManufacturerAKBService implements ImanufacturerAkb
         }
 
     @Override
-    public void add(ManufacturerAKBRequest makb)
+    public ManufacturerAKBResponse add(ManufacturerAKBRequest makb)
         {
-        manufacturerAKBRepo.save(akbMapper.toEntity(makb));
+        return akbMapper.toResponse(manufacturerAKBRepo.save(akbMapper.toEntity(makb)));
         }
 
     @Override

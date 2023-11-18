@@ -8,15 +8,17 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface IBodyPart {
-    void add(BodypartRequest bodyPart);
+    BodypartResponse add(BodypartRequest bodyPart);
 
     List<BodypartResponse> getAll();
 
     List<BodypartResponse> getBydypartByPrice(BigDecimal start, BigDecimal end);
 
-    BodypartResponse searchById(long Id);
+    BodypartResponse searchById(Long Id);
 
     void delete(long id);
 
-    void edit(BodypartRequest part);
+    BodypartResponse edit(BodypartRequest part);
+
+    List<BodypartResponse> getByCode(Long code);
 }

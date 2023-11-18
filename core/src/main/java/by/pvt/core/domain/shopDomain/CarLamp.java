@@ -13,6 +13,7 @@ public class CarLamp {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long code;
     private String name;
     private String model;
     private String socket;
@@ -26,10 +27,5 @@ public class CarLamp {
         if (o == null || getClass() != o.getClass()) return false;
         CarLamp carLamp = (CarLamp) o;
         return Objects.equals(id, carLamp.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 }

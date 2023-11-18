@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface IEngine {
-    void add(EngineRequest engine);
+    EngineResponse add(EngineRequest engine);
 
     List<EngineResponse> getAll();
 
@@ -23,5 +23,7 @@ public interface IEngine {
 
     void delete(long id);
 
-    void edit(EngineRequest engine);
+    EngineResponse edit(EngineRequest engine);
+
+    List<EngineResponse> getByCode(Long code);
 }

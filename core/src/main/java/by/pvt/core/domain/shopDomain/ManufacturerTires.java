@@ -33,8 +33,5 @@ public class ManufacturerTires {
         return Objects.equals(id, that.id);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+
 }

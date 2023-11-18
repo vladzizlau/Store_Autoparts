@@ -27,7 +27,6 @@ public class Shopcart {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @EqualsAndHashCode.Exclude
     @JoinColumn(name = "order_id")
     private Order order;
 
@@ -40,8 +39,4 @@ public class Shopcart {
         return Objects.equals(id, shopcart.id);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

@@ -8,11 +8,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface IUser {
-    User addUser(UserRequest user);
+    UserResponse addUser(UserRequest user);
 
     List<UserResponse> getAllUsers();
 
     UserResponse searchById(long userId);
+
+    User getUserById(long userId);
 
     void delUser(long id);
 

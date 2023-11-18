@@ -10,11 +10,13 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface CarLampRepo extends JpaRepository<CarLamp, Long> {
-    @Query(value = "select l from CarLamp l where l.power = :Power")
-    List<CarLampResponse> getCarLampByPower(@Param("Power") int power);
+    @Query(value = "select l from CarLamp l where l.power = :power")
+    List<CarLamp> getCarLampByPower(@Param("power") int power);
 
-    @Query(value = "select l from CarLamp l where l.socket = :Socket")
-    List<CarLampResponse> getCarLampBySocket(@Param("Socket") String socket);
+    @Query(value = "select l from CarLamp l where l.socket = :socket")
+    List<CarLamp> getCarLampBySocket(@Param("socket") String socket);
     @Query(value = "select l from CarLamp l where l.cost > :start and l.cost < :end")
-    List<CarLampResponse> getCarLampByPrice(BigDecimal start, BigDecimal end);
+    List<CarLamp> getCarLampByPrice(BigDecimal start, BigDecimal end);
+    @Query(value = "select l from CarLamp l where l.code = :code")
+    List<CarLamp> getTireByCode(@Param("code")Long code);
 }

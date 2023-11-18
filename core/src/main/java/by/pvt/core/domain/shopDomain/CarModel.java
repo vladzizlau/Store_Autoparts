@@ -3,6 +3,8 @@ package by.pvt.core.domain.shopDomain;
 import lombok.*;
 
 import jakarta.persistence.*;
+
+import java.util.List;
 import java.util.Objects;
 
 @Data
@@ -31,8 +33,4 @@ public class CarModel {
         return Objects.equals(id, carModel.id);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

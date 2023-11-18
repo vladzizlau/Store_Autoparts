@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Objects;
 
 @Data
-@Builder
 @Entity
 @Table(schema = "parts", name = "manufacturer_akb")
 public class ManufacturerAKB {
@@ -31,8 +30,4 @@ public class ManufacturerAKB {
         return Objects.equals(id, that.id);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

@@ -27,9 +27,9 @@ public class CarLampService implements ICarLamp
         }
 
     @Override
-    public void add(CarLampRequest lamp)
+    public CarLampResponse add(CarLampRequest lamp)
         {
-        carLampRepository.save(carLampMapper.toEntity(lamp));
+        return carLampMapper.toResponse(carLampRepository.save(carLampMapper.toEntity(lamp)));
         }
 
     @Override
@@ -40,17 +40,17 @@ public class CarLampService implements ICarLamp
 
     public List<CarLampResponse> getCarLampByPower(int power)
         {
-        return carLampRepository.getCarLampByPower(power);
+        return carLampMapper.toResponseList(carLampRepository.getCarLampByPower(power));
         }
 
     public List<CarLampResponse> getCarLampBySocket(String socket)
         {
-        return carLampRepository.getCarLampBySocket(socket);
+        return carLampMapper.toResponseList(carLampRepository.getCarLampBySocket(socket));
         }
 
     public List<CarLampResponse> getCarLampByPrice(BigDecimal start, BigDecimal end)
         {
-        return carLampRepository.getCarLampByPrice(start, end);
+        return carLampMapper.toResponseList(carLampRepository.getCarLampByPrice(start, end));
         }
 
     @Override
@@ -67,8 +67,13 @@ public class CarLampService implements ICarLamp
         }
 
     @Override
-    public void edit(CarLampRequest lamp)
+    public CarLampResponse edit(CarLampRequest lamp)
         {
-        carLampRepository.save(carLampMapper.toEntity(lamp));
+        return carLampMapper.toResponse(carLampRepository.save(carLampMapper.toEntity(lamp)));
         }
+        @Override
+        public List <CarLampResponse> getByCode(Long code) {
+            return carLampMapper.toResponseList(carLampRepository.getTireByCode(code));
+        }
+
     }

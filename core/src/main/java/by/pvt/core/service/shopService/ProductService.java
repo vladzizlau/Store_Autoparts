@@ -1,6 +1,9 @@
 package by.pvt.core.service.shopService;
 
+import by.pvt.api.dto.carDTO.BodypartResponse;
+import by.pvt.core.domain.shopDomain.BodyPart;
 import by.pvt.core.service.carService.*;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
@@ -8,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
+@NoArgsConstructor
 public class ProductService {
     private AkbService akbService;
     private BodyPartService bodyPartService;
@@ -45,6 +49,39 @@ public class ProductService {
         };
     }
 
+    public List<List<?>> prodsForCar(Long id) { //Поиск и выдача запчастей по авто
+        List<List<?>> list = new ArrayList<>();
+        list.add(bodyPartService.searchByCarModel(id));
+        list.add(engineService.searchByCarmodel(id));
+        return list;
+    }
+
+    public List<List<?>> prodsByCode(Long id) {
+        List<List<?>> all = new ArrayList<>();
+
+        if (!akbService.getByCode(id).isEmpty()){
+            all.add(akbService.getByCode(id));
+        }
+        else if (!bodyPartService.getByCode(id).isEmpty())
+        {
+            all.add(bodyPartService.getByCode(id));
+        }
+        else if (!carLampService.getByCode(id).isEmpty())
+        {
+            all.add(carLampService.getByCode(id));
+        }
+        else if (!engineService.getByCode(id).isEmpty())
+        {
+            all.add(engineService.getByCode(id));
+        }
+        else if (tiresService.getByCode(id) != null)
+        {
+            all.add(tiresService.getByCode(id));
+        }
+        return all;
+    }
+
+
     public List<List<?>> allprodPages(int countpage, int size) {
         List<List<?>> list = getAllprod();
         List<List<?>> newlist = new ArrayList<List<?>>();
@@ -58,7 +95,6 @@ public class ProductService {
         }
         return getAllprod();
     }
-
 
 
 }

@@ -13,9 +13,9 @@ import java.util.List;
 public interface ICar {
 
 
-    void addCar(CarRequest car);
+    CarResponse addCar(CarRequest car);
 
-    void addModel(CarModelRequest model);
+    CarModelResponse addModel(CarModelRequest model);
 
     List<CarResponse> getAllCar();
 
@@ -26,13 +26,13 @@ public interface ICar {
     CarModelResponse modelSearchById(Long id);
 
 
-    List<CarModel> getModelByBrand(Long id);
+    List<CarModelResponse> getModelByBrand(Long id);
 
     void carDelete(long id);
 
     void modelDelete(long id);
 
-    void carEdit(CarRequest c);
+    CarResponse carEdit(CarRequest c);
 
-    void modelEdit(CarModelRequest c);
+    CarModelResponse modelEdit(CarModelRequest c);
 }

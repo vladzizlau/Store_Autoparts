@@ -17,7 +17,7 @@ public interface IOrder {
 
     void delete(Long id);
 
-    void edit(OrderRequest order);
+    Long edit(OrderRequest order);
 
     // Ищем все ордеры пользователя
     List<OrderResponse> getOrderByUserId(Long id);
