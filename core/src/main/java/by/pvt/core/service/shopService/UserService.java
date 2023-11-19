@@ -6,7 +6,10 @@ import by.pvt.core.domain.User;
 import by.pvt.core.mapper.UserMapper;
 import by.pvt.core.repository.UserRepo;
 import by.pvt.core.service.interfaceService.IUser;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -17,17 +20,20 @@ import java.util.Optional;
 public class UserService implements IUser {
     private UserRepo userRepository;
     private UserMapper userMapper;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepo userRepository, UserMapper userMapper) {
+    public UserService(UserRepo userRepository, UserMapper userMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
+        this.passwordEncoder = passwordEncoder;
     }
-
 
     @Override
     public UserResponse addUser(UserRequest userRequest) {
         User user = userMapper.toEntity(userRequest);
+        String hashpassword = passwordEncoder.encode(userRequest.getPassword());
+        user.setPassword(hashpassword);
         user.setRole("Client");
         user.setLastVisitDate(LocalDate.now());
         return userMapper.toResponse(userRepository.save(user));

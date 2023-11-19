@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tireedit")
+@RequestMapping("tireedit")
 @RequiredArgsConstructor
 public class TireController {
     private TiresService tiresService;

@@ -9,6 +9,7 @@ import by.pvt.core.service.carService.CarService;
 import by.pvt.core.service.shopService.OrderService;
 import by.pvt.core.service.shopService.ShopcartService;
 import jakarta.validation.Valid;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -17,16 +18,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/shop")
+@RequestMapping("shop")
 @RequiredArgsConstructor
+
 public class CartController {
 
     private ShopcartService shopService;
     private OrderService orderService;
 
     @Autowired
-    public CartController(ShopcartService shopcartService, OrderService os) {
-        this.shopService = shopcartService;
+    public CartController(ShopcartService shopcart, OrderService os) {
+        this.shopService = shopcart;
         this.orderService = os;
     }
 

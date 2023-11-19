@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Data
-@Builder
 @Entity
 @Table(schema = "parts", name = "comments")
 public class Comments {
