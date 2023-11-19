@@ -1,11 +1,12 @@
 package by.pvt.core;
 
-import by.pvt.core.config.PropertiesConfig;
 import by.pvt.core.domain.shopDomain.*;
 import by.pvt.core.service.carService.*;
 import by.pvt.core.repository.*;
 import by.pvt.core.service.shopService.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.domain.Pageable;
@@ -17,10 +18,11 @@ import java.time.LocalDate;
 import java.time.Month;
 
 public class Main {
-//    static SessionFactory sessionFactory = HibernateConfig.getSessionFactory();
+
 
 
     public static void main(String[] args) {
+
 //        addUSer();
 //        addCar();
 //        addBodypart();
@@ -55,7 +57,7 @@ public class Main {
 //            .build();
 //            orderRepository.addOrder(order1);
 
-//        Dz_20 dz_20 = new Dz_20();
+//
 
 //        System.out.println(dz_20.getAKBbyVoltage(12));
 //        System.out.println(dz_20.getAKBbyPrice(new BigDecimal(10), new BigDecimal(250)));

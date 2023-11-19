@@ -6,9 +6,8 @@ import by.pvt.core.domain.User;
 import by.pvt.core.mapper.UserMapper;
 import by.pvt.core.repository.UserRepo;
 import by.pvt.core.service.interfaceService.IUser;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +32,7 @@ public class UserService implements IUser {
     public UserResponse addUser(UserRequest userRequest) {
         User user = userMapper.toEntity(userRequest);
         String hashpassword = passwordEncoder.encode(userRequest.getPassword());
-        user.setPassword(hashpassword);
+        user.setPass(hashpassword);
         user.setRole("Client");
         user.setLastVisitDate(LocalDate.now());
         return userMapper.toResponse(userRepository.save(user));
@@ -56,8 +55,8 @@ public class UserService implements IUser {
     }
 
     @Override
-    public UserResponse searchByEmail(String email) {
-        return userMapper.toResponse(userRepository.getUserByEmail(email));
+    public User searchByEmail(String email) {
+        return userRepository.getUserByEmail(email);
     }
 
     @Override
@@ -70,5 +69,8 @@ public class UserService implements IUser {
         userRepository.save(userMapper.toEntity(updateUser));
     }
 
-
+    @Override
+    public UserDetails detailloadByEmail(String email) {
+        return searchByEmail(email);
+    }
 }

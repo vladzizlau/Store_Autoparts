@@ -18,8 +18,8 @@ public class UserRequest {
     @NotBlank(message = "Пароль не соответствует длине (от 6 до 30 символов)")
     @Size(min = 6, max = 30)
     private String password;
-    @NotEmpty
-    @Size(min=2, max =2)
+    @NotNull
+    @Positive
     private Integer age;
     @NotBlank
     @Size(min=8, max = 12)
@@ -27,7 +27,8 @@ public class UserRequest {
     @NotBlank
     @Email(message = "Не правильно введено поле email")
     private String email;
-    @NotEmpty
+    @NotNull
+    @Positive
     private Double amountSum;
 
 }

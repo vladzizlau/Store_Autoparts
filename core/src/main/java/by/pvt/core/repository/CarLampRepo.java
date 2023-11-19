@@ -4,6 +4,7 @@ import by.pvt.api.dto.carDTO.CarLampResponse;
 import by.pvt.core.domain.shopDomain.CarLamp;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
